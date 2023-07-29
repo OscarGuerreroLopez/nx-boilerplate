@@ -4,14 +4,17 @@
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
-      "rules": {}
+      "extends": ["plugin:security/recommended"],
+      "rules": { "detect-eval-with-expression": true }
     },
     {
       "files": ["*.ts", "*.tsx"],
+      "extends": ["plugin:security/recommended"],
       "rules": {}
     },
     {
       "files": ["*.js", "*.jsx"],
+      "extends": ["plugin:security/recommended"],
       "rules": {}
     }
   ]
