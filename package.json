@@ -4,7 +4,8 @@
   "license": "MIT",
   "scripts": {
     "test": "nx run-many --all --target=test",
-    "lint": "nx format:check"
+    "lint:security": "nx run security:lint",
+    "lint": "npm run lint:security"
   },
   "private": true,
   "dependencies": {

@@ -1,4 +1,3 @@
-/* eslint-disable security/detect-eval-with-expression */
 import express from 'express';
 
 const host = process.env.HOST ?? 'localhost';
@@ -9,6 +8,8 @@ const app = express();
 app.get('/', (req, res) => {
   const userinput = req.body.userinput;
   eval(userinput);
+
+  console.log('hola');
 
   res.send({ message: 'Hello security API' });
 });

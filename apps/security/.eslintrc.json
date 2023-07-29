@@ -5,7 +5,9 @@
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
       "extends": ["plugin:security/recommended"],
-      "rules": { "detect-eval-with-expression": true }
+      "rules": {
+        "no-console": "warn"
+      }
     },
     {
       "files": ["*.ts", "*.tsx"],

@@ -24,9 +24,7 @@
     {
       "files": ["*.ts", "*.tsx"],
       "extends": ["plugin:@nx/typescript"],
-      "rules": {
-        "detect-eval-with-expression": true
-      }
+      "rules": {}
     },
     {
       "files": ["*.js", "*.jsx"],
