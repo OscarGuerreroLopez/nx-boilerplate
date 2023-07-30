@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@boilerplate/common": ["libs/common/src/index.ts"]
+      "@boilerplate/common": ["libs/common/src/index.ts"],
+      "@boilerplate/middleware": ["libs/middleware/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
