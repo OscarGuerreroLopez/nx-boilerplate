@@ -1,11 +1,11 @@
 /* eslint-disable */
 export default {
-  displayName: 'security',
+  displayName: 'user',
   preset: '../../jest.preset.js',
   testEnvironment: 'node',
   transform: {
     '^.+\\.[tj]s$': ['ts-jest', { tsconfig: '<rootDir>/tsconfig.spec.json' }],
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
-  coverageDirectory: '../../coverage/apps/security',
+  coverageDirectory: '../../coverage/apps/user',
 };
