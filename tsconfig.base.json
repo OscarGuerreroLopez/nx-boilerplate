@@ -14,6 +14,8 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
     "paths": {
       "@boilerplate/common": ["libs/common/src/index.ts"],
       "@boilerplate/middleware": ["libs/middleware/src/index.ts"]
