@@ -6,6 +6,7 @@ import {
   expressEssentials,
 } from '@boilerplate/middleware';
 import Router from './http/router';
+import { LoadMethods } from './infra/repo/dbMethods';
 
 const host = EnvVars.HOST ?? 'localhost';
 const port = EnvVars.PORT ? Number(process.env.PORT) : 3001;
@@ -29,6 +30,7 @@ process.on('unhandledRejection', (e: any) => {
   process.exit(1);
 });
 
-app.listen(port, host, () => {
+app.listen(port, host, async () => {
+  await LoadMethods();
   console.log(`[ ready ] http://${host}:${port}`);
 });

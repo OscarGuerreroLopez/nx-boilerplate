@@ -11,6 +11,9 @@ interface EnvObject {
   NODE_ENV: string;
   SECRET: string;
   HOST: string;
+  MONGO_USER: string;
+  MONGO_PASSWORD: string;
+  MONGO_URL: string;
 }
 
 const getEnvVars = (): EnvObject => {
@@ -19,6 +22,9 @@ const getEnvVars = (): EnvObject => {
     PORT: num(),
     SECRET: str(),
     HOST: str(),
+    MONGO_USER: str({}),
+    MONGO_PASSWORD: str(),
+    MONGO_URL: str(),
   });
 
   return EnvVars as EnvObject;

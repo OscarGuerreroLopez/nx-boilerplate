@@ -22,9 +22,12 @@
     "express-rate-limit": "^6.8.1",
     "express-validator": "^7.0.1",
     "helmet": "^7.0.0",
+    "mongodb": "^5.7.0",
+    "mongodb-memory-server": "^8.13.0",
     "tslib": "^2.3.0",
     "underscore": "^1.13.6",
-    "uuid": "^9.0.0"
+    "uuid": "^9.0.0",
+    "winston": "^3.10.0"
   },
   "devDependencies": {
     "@nx/esbuild": "16.5.5",
