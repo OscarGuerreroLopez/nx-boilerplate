@@ -54,7 +54,7 @@ describe('user service test', () => {
       }
     });
 
-    it('should throw an error if password not correct', async () => {
+    it('should throw an error if missing paramst', async () => {
       try {
         await AddUser({
           fname: 'Oscar',
