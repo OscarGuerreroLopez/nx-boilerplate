@@ -7,6 +7,7 @@ import {
 } from '@boilerplate/middleware';
 import Router from './http/router';
 import { LoadMethods } from './infra/repo/dbMethods';
+import { AddAdminUser, AddUsers } from './infra/seed';
 
 const host = EnvVars.HOST ?? 'localhost';
 const port = EnvVars.PORT ? Number(process.env.PORT) : 3001;
@@ -32,5 +33,7 @@ process.on('unhandledRejection', (e: any) => {
 
 app.listen(port, host, async () => {
   await LoadMethods();
+  await AddAdminUser();
+  await AddUsers();
   console.log(`[ ready ] http://${host}:${port}`);
 });
