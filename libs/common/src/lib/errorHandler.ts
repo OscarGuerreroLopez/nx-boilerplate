@@ -1,14 +1,14 @@
-import { boilerplateLogger, SeverityType, IObjectLiteral } from './common';
+import { logger, SeverityType, IObjectLiteral } from './common';
 
 export interface AdditionalErrorInfo {
   severity: SeverityType;
   service: string;
   file: string;
-  function: string;
+  property: string;
   code: string;
   headers?: IObjectLiteral;
   method?: string;
-  data: IObjectLiteral;
+  [key: string]: any;
 }
 
 export interface ErrorHandlerParams {
@@ -32,14 +32,17 @@ export const ErrorHandler = ({
     message = error;
   }
 
-  boilerplateLogger[additionalErrorInfo.severity](message, {
-    service: additionalErrorInfo.service,
-    code: additionalErrorInfo.code || '',
-    headers: additionalErrorInfo.headers || null,
-    method: additionalErrorInfo.method || null,
-    file: additionalErrorInfo.file,
-    function: additionalErrorInfo.function,
+  const { severity, service, code, headers, method, file, property, ...rest } =
+    additionalErrorInfo;
+
+  logger[severity](message, {
+    service,
+    code,
+    headers,
+    property,
+    file,
+    method,
     stack,
-    data: additionalErrorInfo.data,
+    ...rest,
   });
 };

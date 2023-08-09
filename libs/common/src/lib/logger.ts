@@ -13,14 +13,14 @@ export enum Severity {
 interface BoilerplateLogger {
   service: string;
   file: string;
-  function: string;
+  method?: string;
   code: string;
   [key: string]: any;
 }
 
 export type SeverityType = 'info' | 'warn' | 'error';
 
-const Logger = winston.createLogger({
+const WinstonLogger = winston.createLogger({
   // level: "info",
   format: combine(timestamp(), prettyPrint()),
 
@@ -43,7 +43,7 @@ const Logger = winston.createLogger({
   ],
 });
 
-Logger.on('error', (error) => {
+WinstonLogger.on('error', (error) => {
   console.error('!!!!!!!!!!!!!!!!Logger Error caught', error);
 });
 
@@ -51,21 +51,21 @@ if (
   EnvVars.NODE_ENV === NodeEnvEnum.DEVELOPMENT ||
   EnvVars.NODE_ENV === NodeEnvEnum.TEST
 ) {
-  Logger.add(
+  WinstonLogger.add(
     new winston.transports.Console({
       format: winston.format.simple(),
     })
   );
 }
 
-export const boilerplateLogger = {
+export const logger = {
   info: (message: string, data: BoilerplateLogger): void => {
-    Logger.info(message, SanitiseBody(data));
+    WinstonLogger.info(message, SanitiseBody(data));
   },
   warn: (message: string, data: BoilerplateLogger): void => {
-    Logger.info(message, SanitiseBody(data));
+    WinstonLogger.info(message, SanitiseBody(data));
   },
   error: (message: string, data: BoilerplateLogger): void => {
-    Logger.info(message, SanitiseBody(data));
+    WinstonLogger.info(message, SanitiseBody(data));
   },
 };

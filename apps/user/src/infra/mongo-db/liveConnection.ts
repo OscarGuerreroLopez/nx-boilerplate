@@ -1,5 +1,5 @@
 import { Db, MongoClient, MongoClientOptions } from 'mongodb';
-import { boilerplateLogger, EnvVars } from '@boilerplate/common';
+import { logger, EnvVars } from '@boilerplate/common';
 
 export const LiveConnection = (() => {
   let mongoClient: MongoClient;
@@ -17,14 +17,14 @@ export const LiveConnection = (() => {
       mongoClient = new MongoClient(uri, options);
       await mongoClient.connect();
       db = mongoClient.db('accounts');
-      boilerplateLogger.info('accounts Live DB activated', {
+      logger.info('accounts Live DB activated', {
         service: 'boilerplate',
         file: 'liveConnection.ts',
         function: 'createConnection',
         code: '',
       });
     } catch (error) {
-      boilerplateLogger.error(`Error connecting to the DB server: ${error}`, {
+      logger.error(`Error connecting to the DB server: ${error}`, {
         service: 'boilerplate',
         file: 'liveConnection.ts',
         function: 'createConnection',
@@ -45,7 +45,7 @@ export const LiveConnection = (() => {
     closeConnection: async () => {
       if (mongoClient) {
         await mongoClient.close();
-        boilerplateLogger.info('accounts DB closed', {
+        logger.info('accounts DB closed', {
           service: 'boilerplate',
           file: 'liveConnection.ts',
           function: 'closeConnection',

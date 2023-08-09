@@ -1,4 +1,4 @@
-import { BuildPassword, boilerplateLogger } from '@boilerplate/common';
+import { BuildPassword, logger } from '@boilerplate/common';
 import { DbMethods } from '../repo/dbMethods';
 import { UserModel } from '../repo/mongo-models';
 
@@ -20,14 +20,14 @@ export const AddAdminUser = async (): Promise<void> => {
 
     if (Object.keys(userFound).length === 0) {
       await DbMethods('users').insert<UserModel>(user);
-      boilerplateLogger.info('Added admin initial load', {
+      logger.info('Added admin initial load', {
         service: 'boilerplate',
         file: 'seed/index.ts',
         function: 'AddAdminUser',
         code: '',
       });
     } else {
-      boilerplateLogger.info('admin already in DB', {
+      logger.info('admin already in DB', {
         service: 'boilerplate',
         file: 'seed/index.ts',
         function: 'AddAdminUser',
@@ -56,14 +56,14 @@ export const AddUsers = async (): Promise<void> => {
 
     if (Object.keys(userFound).length === 0) {
       await DbMethods('users').insert<UserModel>(user);
-      boilerplateLogger.info('Added user1 initial load', {
+      logger.info('Added user1 initial load', {
         service: 'boilerplate',
         file: 'seed/index.ts',
         function: 'AddUsers',
         code: '',
       });
     } else {
-      boilerplateLogger.info('user1 already in DB', {
+      logger.info('user1 already in DB', {
         service: 'boilerplate',
         file: 'seed/index.ts',
         function: 'AddUsers',
@@ -83,14 +83,14 @@ export const AddUsers = async (): Promise<void> => {
 
     if (Object.keys(userFound).length === 0) {
       await DbMethods('users').insert<UserModel>(user);
-      boilerplateLogger.info('Added user2 initial load', {
+      logger.info('Added user2 initial load', {
         service: 'boilerplate',
         file: 'seed/index.ts',
         function: 'AddUsers',
         code: '',
       });
     } else {
-      boilerplateLogger.info('user2 already in DB', {
+      logger.info('user2 already in DB', {
         service: 'boilerplate',
         file: 'seed/index.ts',
         function: 'AddUsers',

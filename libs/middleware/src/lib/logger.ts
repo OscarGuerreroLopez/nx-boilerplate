@@ -2,7 +2,7 @@ import { Response, NextFunction } from 'express';
 import { v4 as uuidv4 } from 'uuid';
 import {
   ErrorHandler,
-  boilerplateLogger,
+  logger,
   Severity,
   CustomRequest,
 } from '@boilerplate/common';
@@ -15,10 +15,10 @@ export const LoggerMiddleware = (
   try {
     request.code = uuidv4();
 
-    boilerplateLogger.info('Logger middleware', {
+    logger.info('Logger middleware', {
       service: 'boilerplate',
       file: 'logger.ts',
-      function: 'LoggerMiddleware',
+      property: 'LoggerMiddleware',
       code: request.code,
       body: request.body,
       headers: request.headers,
@@ -33,7 +33,7 @@ export const LoggerMiddleware = (
         severity: Severity.ERROR,
         service: 'boilerplate',
         file: 'logger.ts',
-        function: 'LoggerMiddleware',
+        property: 'LoggerMiddleware',
         code: request.code,
         data: request.body,
         headers: request.headers,
