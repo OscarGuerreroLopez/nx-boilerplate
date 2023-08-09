@@ -1,6 +1,6 @@
 import { Db, MongoClient, MongoServerError } from 'mongodb';
 import { MongoMemoryReplSet } from 'mongodb-memory-server';
-import { Logger } from '@boilerplate/common';
+import { boilerplateLogger } from '@boilerplate/common';
 
 export const TestConnection = (() => {
   let mongoClient: MongoClient;
@@ -14,7 +14,12 @@ export const TestConnection = (() => {
       });
 
       const replicaUri = replSet.getUri();
-      Logger.info(`DB will be located at ${replicaUri}`);
+      boilerplateLogger.info(`DB will be located at ${replicaUri}`, {
+        service: 'boilerplate',
+        file: 'testConnection.ts',
+        function: 'createConnection',
+        code: '',
+      });
 
       mongoClient = new MongoClient(replicaUri, {
         maxPoolSize: 10,
@@ -22,10 +27,20 @@ export const TestConnection = (() => {
       });
       await mongoClient.connect();
       db = mongoClient.db('memoryDB');
-      Logger.info('memoryDB activated');
+      boilerplateLogger.info('memoryDB activated', {
+        service: 'boilerplate',
+        file: 'testConnection.ts',
+        function: 'createConnection',
+        code: '',
+      });
     } catch (error) {
       if (error instanceof MongoServerError) {
-        Logger.error(`Error connecting to the DB server: ${error}`); // special case for some reason
+        boilerplateLogger.error(`Error connecting to the DB server: ${error}`, {
+          service: 'boilerplate',
+          file: 'testConnection.ts',
+          function: 'createConnection',
+          code: '',
+        }); // special case for some reason
       }
       throw error;
     }

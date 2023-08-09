@@ -4,6 +4,7 @@ import {
   expressSecureHeaders,
   expressRateLimiter,
   expressEssentials,
+  LoggerMiddleware,
 } from '@boilerplate/middleware';
 import Router from './http/router';
 import { LoadMethods } from './infra/repo/dbMethods';
@@ -16,7 +17,7 @@ const app = express();
 expressSecureHeaders(app);
 expressRateLimiter(app);
 expressEssentials(app);
-
+app.use(LoggerMiddleware);
 app.use(Router);
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

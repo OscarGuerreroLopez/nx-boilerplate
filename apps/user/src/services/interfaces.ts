@@ -1,4 +1,5 @@
 import { User } from '../entities';
+import { IObjectLiteral } from '@boilerplate/common';
 
 export type AddUser = (user: Partial<User>) => Promise<boolean>;
 export type MakePassword = (plainPassword: string) => Promise<string>;
@@ -8,7 +9,7 @@ export type FindAllUsers = () => Promise<Partial<User>[]>;
 
 export type RemovePassword = <T>(
   items: T | T[]
-) => { [key: string]: any }[] | { [key: string]: any };
+) => IObjectLiteral[] | IObjectLiteral;
 
 export interface FindUsers {
   findUserByEmail: FindUserByEmail;

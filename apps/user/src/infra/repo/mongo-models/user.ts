@@ -1,7 +1,7 @@
 import { Collection } from 'mongodb';
 import { Database } from '../../mongo-db';
 
-import { Logger } from '@boilerplate/common';
+import { boilerplateLogger } from '@boilerplate/common';
 import { UserModel } from './interfaces';
 
 export const UserRepo = (() => {
@@ -22,7 +22,12 @@ export const UserRepo = (() => {
         await makeUserIntance();
       }
 
-      Logger.info('returning users instance model');
+      boilerplateLogger.info('returning users instance model', {
+        service: 'boilerplate',
+        file: 'user.ts',
+        function: 'userInstance',
+        code: '',
+      });
 
       return instance;
     },

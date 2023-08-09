@@ -1,9 +1,10 @@
-import { Handler, Response, Request } from 'express';
+import { Handler, Response } from 'express';
+import { CustomRequest, ErrorHandler, Severity } from '@boilerplate/common';
 import { User } from '../../entities/interfaces';
 import { AddUser } from '../../services';
 
 export const adduserHandler: Handler = async (
-  request: Request,
+  request: CustomRequest,
   response: Response
 ) => {
   try {
@@ -15,7 +16,21 @@ export const adduserHandler: Handler = async (
       result,
     });
   } catch (error) {
-    console.error(error);
-    return response.status(400).send({ msg: 'bad request' });
+    ErrorHandler({
+      error,
+      additionalErrorInfo: {
+        severity: Severity.WARN,
+        service: 'boilerplate',
+        file: 'addUser.ts',
+        function: 'adduserHandler',
+        code: request.code,
+        data: { body: request.body },
+        headers: request.headers,
+        method: `Method: ${request.method}, path: ${request.path}, host:${request.hostname}`,
+      },
+    });
+    return response
+      .status(400)
+      .send({ msg: 'bad request', code: request.code });
   }
 };

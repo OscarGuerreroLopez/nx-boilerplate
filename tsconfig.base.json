@@ -21,5 +21,6 @@
       "@boilerplate/middleware": ["libs/middleware/src/index.ts"]
     }
   },
-  "exclude": ["node_modules", "tmp"]
+  "exclude": ["node_modules", "tmp"],
+  "include": ["global.d.ts", "thirdparty.d.ts"]
 }

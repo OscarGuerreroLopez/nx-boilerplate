@@ -1,4 +1,4 @@
-import { BuildPassword, Logger } from '@boilerplate/common';
+import { BuildPassword, boilerplateLogger } from '@boilerplate/common';
 import { DbMethods } from '../repo/dbMethods';
 import { UserModel } from '../repo/mongo-models';
 
@@ -20,9 +20,19 @@ export const AddAdminUser = async (): Promise<void> => {
 
     if (Object.keys(userFound).length === 0) {
       await DbMethods('users').insert<UserModel>(user);
-      Logger.info('Added admin initial load');
+      boilerplateLogger.info('Added admin initial load', {
+        service: 'boilerplate',
+        file: 'seed/index.ts',
+        function: 'AddAdminUser',
+        code: '',
+      });
     } else {
-      Logger.info('admin already in DB');
+      boilerplateLogger.info('admin already in DB', {
+        service: 'boilerplate',
+        file: 'seed/index.ts',
+        function: 'AddAdminUser',
+        code: '',
+      });
     }
   } catch (error) {
     throw new Error('Not able to add admin user');
@@ -46,9 +56,19 @@ export const AddUsers = async (): Promise<void> => {
 
     if (Object.keys(userFound).length === 0) {
       await DbMethods('users').insert<UserModel>(user);
-      Logger.info('Added user1 initial load');
+      boilerplateLogger.info('Added user1 initial load', {
+        service: 'boilerplate',
+        file: 'seed/index.ts',
+        function: 'AddUsers',
+        code: '',
+      });
     } else {
-      Logger.info('user1 already in DB');
+      boilerplateLogger.info('user1 already in DB', {
+        service: 'boilerplate',
+        file: 'seed/index.ts',
+        function: 'AddUsers',
+        code: '',
+      });
     }
 
     user = {
@@ -63,9 +83,19 @@ export const AddUsers = async (): Promise<void> => {
 
     if (Object.keys(userFound).length === 0) {
       await DbMethods('users').insert<UserModel>(user);
-      Logger.info('Added user2 initial load');
+      boilerplateLogger.info('Added user2 initial load', {
+        service: 'boilerplate',
+        file: 'seed/index.ts',
+        function: 'AddUsers',
+        code: '',
+      });
     } else {
-      Logger.info('user2 already in DB');
+      boilerplateLogger.info('user2 already in DB', {
+        service: 'boilerplate',
+        file: 'seed/index.ts',
+        function: 'AddUsers',
+        code: '',
+      });
     }
   } catch (error) {
     throw new Error('Not able to add admin user');

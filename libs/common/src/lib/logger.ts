@@ -1,5 +1,6 @@
 import * as winston from 'winston';
 import { EnvVars, NodeEnvEnum } from './validateEnv';
+import { SanitiseBody } from './bodySanitation';
 
 const { combine, timestamp, prettyPrint } = winston.format;
 
@@ -9,9 +10,17 @@ export enum Severity {
   ERROR = 'error',
 }
 
+interface BoilerplateLogger {
+  service: string;
+  file: string;
+  function: string;
+  code: string;
+  [key: string]: any;
+}
+
 export type SeverityType = 'info' | 'warn' | 'error';
 
-export const Logger = winston.createLogger({
+const Logger = winston.createLogger({
   // level: "info",
   format: combine(timestamp(), prettyPrint()),
 
@@ -48,3 +57,15 @@ if (
     })
   );
 }
+
+export const boilerplateLogger = {
+  info: (message: string, data: BoilerplateLogger): void => {
+    Logger.info(message, SanitiseBody(data));
+  },
+  warn: (message: string, data: BoilerplateLogger): void => {
+    Logger.info(message, SanitiseBody(data));
+  },
+  error: (message: string, data: BoilerplateLogger): void => {
+    Logger.info(message, SanitiseBody(data));
+  },
+};

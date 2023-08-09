@@ -7,7 +7,7 @@
     "test:user": "nx test user",
     "lint:user": "nx run user:lint",
     "lint": "npm run lint:user",
-    "serve:all": "npm run build:all && nx run-many --target=serve --projects=user --parallel",
+    "serve:all": "rm -rf logs && npm run build:all && nx run-many --target=serve --projects=user --parallel",
     "build:all": "npm run lint && nx run-many --target=build --projects=user --parallel",
     "serve:user": "npm run build:all && nx serve user"
   },

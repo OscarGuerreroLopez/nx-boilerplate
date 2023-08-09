@@ -1,5 +1,6 @@
 import bcrypt from 'bcryptjs';
 import _ from 'underscore';
+import { IObjectLiteral } from './common';
 
 export type MakePassword = (plainPassword: string) => Promise<string>;
 export type ComparePassword = (
@@ -9,7 +10,7 @@ export type ComparePassword = (
 
 export type RemovePassword = <T>(
   items: T | T[]
-) => { [key: string]: any }[] | { [key: string]: any };
+) => IObjectLiteral[] | IObjectLiteral;
 
 export interface MakeComparePassword {
   makePassword: MakePassword;

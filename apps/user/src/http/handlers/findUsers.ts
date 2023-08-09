@@ -1,4 +1,5 @@
-import { Handler, Response, Request } from 'express';
+import { Handler, Response } from 'express';
+import { CustomRequest } from '@boilerplate/common';
 import qs from 'qs';
 import {
   FindAllUsers,
@@ -7,7 +8,7 @@ import {
 } from '../../services';
 
 export const findUserHandler: Handler = async (
-  request: Request,
+  request: CustomRequest,
   response: Response
 ) => {
   try {
@@ -38,7 +39,7 @@ export const findUserHandler: Handler = async (
 };
 
 export const findAllUsersHandler: Handler = async (
-  request: Request,
+  request: CustomRequest,
   response: Response
 ) => {
   try {

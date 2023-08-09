@@ -1,4 +1,4 @@
-import { common } from './Common';
+import { common } from './common';
 
 describe('common', () => {
   it('should work', () => {
