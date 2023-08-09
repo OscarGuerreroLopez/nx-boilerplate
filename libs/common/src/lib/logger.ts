@@ -63,9 +63,9 @@ export const logger = {
     WinstonLogger.info(message, SanitiseBody(data));
   },
   warn: (message: string, data: BoilerplateLogger): void => {
-    WinstonLogger.info(message, SanitiseBody(data));
+    WinstonLogger.warn(message, SanitiseBody(data));
   },
   error: (message: string, data: BoilerplateLogger): void => {
-    WinstonLogger.info(message, SanitiseBody(data));
+    WinstonLogger.warn(message, SanitiseBody(data));
   },
 };
