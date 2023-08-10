@@ -1,10 +1,9 @@
 import { Handler, Response } from 'express';
 import { CustomRequest } from '@boilerplate/common';
-import qs from 'qs';
 import {
-  FindAllUsers,
-  FindUserByEMail,
-  FindUserByUserId,
+  findAllUsers,
+  findUserByEmail,
+  findUserByUserId,
 } from '../../services';
 
 export const findUserHandler: Handler = async (
@@ -22,11 +21,11 @@ export const findUserHandler: Handler = async (
     }
 
     if (email) {
-      result = await FindUserByEMail(email);
+      result = await findUserByEmail(email);
     }
 
     if (userId) {
-      result = await FindUserByUserId(userId);
+      result = await findUserByUserId(userId);
     }
 
     return response.status(200).send({
@@ -43,7 +42,7 @@ export const findAllUsersHandler: Handler = async (
   response: Response
 ) => {
   try {
-    const result = await FindAllUsers();
+    const result = await findAllUsers();
 
     return response.status(200).send({
       result,

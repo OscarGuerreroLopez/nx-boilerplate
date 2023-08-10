@@ -9,17 +9,16 @@ const removePassword = buildPassword.removePassword;
 
 const makePassword = buildPassword.makePassword;
 
-export const AddUser = MakeAddUser(DbMethods, makePassword);
+export const addUser = MakeAddUser(DbMethods, makePassword);
 
-export const {
-  findUserByEmail: FindUserByEMail,
-  findUserByUserId: FindUserByUserId,
-  findAllUsers: FindAllUsers,
-} = MakeFindUser(DbMethods, removePassword);
+export const { findUserByEmail, findUserByUserId, findAllUsers } = MakeFindUser(
+  DbMethods,
+  removePassword
+);
 
 const comparePassword = buildPassword.comparePassword;
 
-export const LoginUser = MakeLoginUser({
+export const loginUser = MakeLoginUser({
   repo: DbMethods,
   comparePassword,
   MakeToken,

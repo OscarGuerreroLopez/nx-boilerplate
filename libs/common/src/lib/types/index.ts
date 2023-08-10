@@ -14,6 +14,7 @@ export type RequestUser = {
 export interface CustomRequest extends Request {
   code: string;
   user: RequestUser;
+  clientIp: string;
 }
 
 export interface TokenPayload {

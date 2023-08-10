@@ -55,7 +55,7 @@ describe('Login user test', () => {
     });
   });
 
-  it('should throw a missing params error', async () => {
+  it('should throw a user not found error', async () => {
     try {
       await loginUser({
         email: 'pepe@oscar.com',

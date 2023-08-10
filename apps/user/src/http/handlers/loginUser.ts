@@ -1,19 +1,26 @@
 import { Handler, Response } from 'express';
+import { loginUser } from '../../services';
 import { CustomRequest, ErrorHandler, Severity } from '@boilerplate/common';
-import { User } from '../../entities/interfaces';
-import { addUser } from '../../services';
 
-export const adduserHandler: Handler = async (
+export const loginUserHandler: Handler = async (
   request: CustomRequest,
   response: Response
 ) => {
   try {
-    const user: Partial<User> = request.body;
+    const params = {
+      ...request.body,
+      userAgent: request.headers['user-agent'],
+      clientIp: request.clientIp,
+    };
 
-    const result = await addUser(user);
+    const token = await loginUser(params);
+
+    if (!token) {
+      throw Error('Error login check logs');
+    }
 
     return response.status(200).send({
-      result,
+      token,
     });
   } catch (error) {
     ErrorHandler({
@@ -21,16 +28,18 @@ export const adduserHandler: Handler = async (
       additionalErrorInfo: {
         severity: Severity.WARN,
         service: 'boilerplate',
-        file: 'addUser.ts',
-        property: 'adduserHandler',
+        file: 'loginUser.ts',
+        property: 'loginUserHandler',
         code: request.code,
         body: request.body,
         headers: request.headers,
         method: `Method: ${request.method}, path: ${request.path}, host:${request.hostname}`,
       },
     });
-    return response
-      .status(400)
-      .send({ msg: 'bad request', code: request.code });
+
+    return response.status(500).send({
+      message: 'Login issue, check logs',
+      code: request.code,
+    });
   }
 };
