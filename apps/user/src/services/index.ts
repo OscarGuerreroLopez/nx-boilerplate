@@ -1,7 +1,8 @@
 import { DbMethods } from '../infra/repo/dbMethods';
 import { MakeAddUser } from './addUser.service';
-import { BuildPassword } from '@boilerplate/common';
+import { BuildPassword, MakeToken } from '@boilerplate/common';
 import { MakeFindUser } from './findUser.service';
+import { MakeLoginUser } from './loginUser.service';
 
 const buildPassword = BuildPassword(10);
 const removePassword = buildPassword.removePassword;
@@ -15,3 +16,11 @@ export const {
   findUserByUserId: FindUserByUserId,
   findAllUsers: FindAllUsers,
 } = MakeFindUser(DbMethods, removePassword);
+
+const comparePassword = buildPassword.comparePassword;
+
+export const LoginUser = MakeLoginUser({
+  repo: DbMethods,
+  comparePassword,
+  MakeToken,
+});

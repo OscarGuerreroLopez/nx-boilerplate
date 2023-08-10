@@ -15,3 +15,17 @@ export interface CustomRequest extends Request {
   code: string;
   user: RequestUser;
 }
+
+export interface TokenPayload {
+  id: string;
+  role: string;
+  userAgent: string;
+  clientIp: string;
+}
+
+export type MakeTokenType = (data: TokenPayload) => string;
+export type VerifyTokenType = (token: string) => TokenPayload;
+export interface MakeJwt {
+  makeToken: MakeTokenType;
+  verifyToken: VerifyTokenType;
+}
