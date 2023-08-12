@@ -5,6 +5,7 @@ export interface UserEntity {
   getPassword: () => string;
   getRole: () => RoleTypeEnum;
   getUserId: () => string;
+  getUserStatus: () => StatusEnum;
 }
 
 export interface User {
@@ -14,8 +15,14 @@ export interface User {
   password: string;
   role: RoleTypeEnum;
   userId: string;
+  status: StatusEnum;
 }
 
+export enum StatusEnum {
+  ACTIVE = 'active',
+  DELETED = 'deleted',
+  SUSPENDED = 'suspended',
+}
 export enum RoleTypeEnum {
   USER = 'User',
   ADMIN = 'Admin',
@@ -29,4 +36,6 @@ export interface BuildMakeUserParams {
 }
 export type MakeUser = (user: Partial<User>) => Readonly<UserEntity>;
 
-export type BuildMakeUser = (BuildMakeUserParams) => MakeUser;
+export type BuildMakeUser = (
+  BuildMakeUserParams: BuildMakeUserParams
+) => MakeUser;

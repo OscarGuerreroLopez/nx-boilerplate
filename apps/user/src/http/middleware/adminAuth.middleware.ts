@@ -6,7 +6,7 @@ import {
   ErrorHandler,
   Severity,
 } from '@boilerplate/common';
-import { RoleTypeEnum } from '../../entities';
+import { RoleTypeEnum, StatusEnum } from '../../entities';
 
 export const MakeAdminAuthMiddleware = (
   authCommon: AuthCommonType,
@@ -30,6 +30,10 @@ export const MakeAdminAuthMiddleware = (
 
       if (Object.keys(user).length === 0) {
         throw new Error(`User ${decodedToken.id} does not exist in DB`);
+      }
+
+      if (user.status !== StatusEnum.ACTIVE) {
+        throw new Error(`User ${user.userId} is not active `);
       }
       // in case user role has chnaged since token creation
       if (decodedToken.role !== user.role) {

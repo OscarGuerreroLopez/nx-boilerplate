@@ -38,6 +38,7 @@ export const BuildMakeUser: BuildMakeUserType = (params) => {
       getPassword: () => user.password,
       getRole: () => user.role,
       getUserId: () => user.userId,
+      getUserStatus: () => user.status,
     });
   };
 

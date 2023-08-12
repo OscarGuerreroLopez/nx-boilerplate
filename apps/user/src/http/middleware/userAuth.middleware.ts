@@ -6,6 +6,7 @@ import {
 } from '@boilerplate/common';
 import { NextFunction, Response } from 'express';
 import { FindUserByUserIdType } from '../../services/interfaces';
+import { StatusEnum } from '../../entities';
 
 export const MakeAuthUserMiddleware = (
   authCommon: AuthCommonType,
@@ -30,7 +31,9 @@ export const MakeAuthUserMiddleware = (
       if (Object.keys(user).length === 0) {
         throw new Error(`User ${decodedToken.id} does not exist in DB`);
       }
-
+      if (user.status !== StatusEnum.ACTIVE) {
+        throw new Error(`User ${user.userId} is not active `);
+      }
       // in case user role has chnaged since token creation
       if (decodedToken.role !== user.role) {
         throw new Error(

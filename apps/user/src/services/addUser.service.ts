@@ -18,6 +18,7 @@ export const MakeAddUser = (
       email: validUser.getEmail(),
       role: validUser.getRole(),
       userId: validUser.getUserId(),
+      status: validUser.getUserStatus(),
     });
 
     if (!result) {
