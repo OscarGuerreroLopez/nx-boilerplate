@@ -1,8 +1,8 @@
 export * from './interfaces';
-import { buildMakeUser } from './buildMakeUser';
+import { BuildMakeUser } from './buildMakeUser';
 import { validateEmail, validatePassword, makeUUID } from '@boilerplate/common';
 
-export const makeUser = buildMakeUser({
+export const makeUser = BuildMakeUser({
   validateEmail,
   validatePassword,
   makeUUID,

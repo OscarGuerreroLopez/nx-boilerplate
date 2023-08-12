@@ -1,5 +1,5 @@
 import { body } from 'express-validator';
-export const UserValidator = [
+export const userValidator = [
   body('fname').exists().withMessage('missing name'),
   body('lname').exists().withMessage('missing name'),
   body('password')
@@ -13,7 +13,7 @@ export const UserValidator = [
     .withMessage('missing or invalid email'),
 ];
 
-export const UserLoginValidator = [
+export const userLoginValidator = [
   body('password')
     .exists()
     .isLength({ min: 4, max: 6 })

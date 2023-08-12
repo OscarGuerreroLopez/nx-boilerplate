@@ -3,7 +3,7 @@ import { CustomRequest } from '@boilerplate/common';
 import { validationResult } from 'express-validator';
 import { ErrorHandler, Severity } from '@boilerplate/common';
 
-export const ValidatorMiddleware = (
+export const validatorMiddleware = (
   request: CustomRequest,
   response: Response,
   next: NextFunction

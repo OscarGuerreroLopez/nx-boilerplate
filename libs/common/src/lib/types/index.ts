@@ -5,7 +5,8 @@ export type IObjectLiteral = {
 };
 
 export type RequestUser = {
-  name: string;
+  fname: string;
+  lname: string;
   email: string;
   role: string;
   userId: string;
@@ -30,3 +31,9 @@ export interface MakeJwt {
   makeToken: MakeTokenType;
   verifyToken: VerifyTokenType;
 }
+
+export type AuthCommonType = (
+  token?: string,
+  userAgent?: string | undefined,
+  clientIp?: string | undefined
+) => TokenPayload;

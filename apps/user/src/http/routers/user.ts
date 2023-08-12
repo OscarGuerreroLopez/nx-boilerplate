@@ -3,26 +3,27 @@ import asyncHandler from 'express-async-handler';
 import { adduserHandler } from '../handlers/addUser';
 import { findAllUsersHandler, findUserHandler } from '../handlers/findUsers';
 import {
-  UserLoginValidator,
-  UserValidator,
+  userLoginValidator,
+  userValidator,
 } from '../validators/user.validator';
-import { ValidatorMiddleware } from '@boilerplate/middleware';
+import { validatorMiddleware } from '@boilerplate/middleware';
 import { loginUserHandler } from '../handlers/loginUser';
+import { authUserMiddleware } from '../middleware';
 
 const router = Router();
 
 router.post(
   '/',
-  UserValidator,
-  ValidatorMiddleware,
+  userValidator,
+  validatorMiddleware,
   asyncHandler(adduserHandler)
 );
-router.get('/', asyncHandler(findUserHandler));
+router.get('/', authUserMiddleware, asyncHandler(findUserHandler));
 router.get('/all', asyncHandler(findAllUsersHandler));
 router.post(
   '/login',
-  UserLoginValidator,
-  ValidatorMiddleware,
+  userLoginValidator,
+  validatorMiddleware,
   asyncHandler(loginUserHandler)
 );
 

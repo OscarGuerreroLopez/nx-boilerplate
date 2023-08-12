@@ -5,6 +5,7 @@ import {
   expressRateLimiter,
   expressEssentials,
   LoggerMiddleware,
+  expressRequestIp,
 } from '@boilerplate/middleware';
 import Router from './http/router';
 import { LoadMethods } from './infra/repo/dbMethods';
@@ -17,6 +18,7 @@ const app = express();
 expressSecureHeaders(app);
 expressRateLimiter(app);
 expressEssentials(app);
+expressRequestIp(app);
 app.use(LoggerMiddleware);
 app.use(Router);
 

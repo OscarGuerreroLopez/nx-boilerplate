@@ -19,7 +19,7 @@ describe('Login user test', () => {
   const loginUser = MakeLoginUser({
     repo: DbMethods,
     comparePassword,
-    MakeToken: makeTokenMock,
+    makeToken: makeTokenMock,
   });
 
   beforeAll(async () => {

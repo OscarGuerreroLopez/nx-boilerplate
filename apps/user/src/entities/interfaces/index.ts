@@ -3,7 +3,7 @@ export interface UserEntity {
   getLname: () => string;
   getEmail: () => string;
   getPassword: () => string;
-  getRole: () => RoleType;
+  getRole: () => RoleTypeEnum;
   getUserId: () => string;
 }
 
@@ -12,10 +12,10 @@ export interface User {
   lname: string;
   email: string;
   password: string;
-  role: RoleType;
+  role: RoleTypeEnum;
   userId: string;
 }
-export type RoleType = 'User' | 'Admin' | 'Guess';
+
 export enum RoleTypeEnum {
   USER = 'User',
   ADMIN = 'Admin',

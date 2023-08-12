@@ -1,6 +1,10 @@
-import { BuildMakeUser, MakeUser, RoleTypeEnum } from './interfaces';
+import {
+  BuildMakeUser as BuildMakeUserType,
+  MakeUser,
+  RoleTypeEnum,
+} from './interfaces';
 
-export const buildMakeUser: BuildMakeUser = (params) => {
+export const BuildMakeUser: BuildMakeUserType = (params) => {
   const { validateEmail, validatePassword, makeUUID } = params;
 
   const makeUser: MakeUser = (user) => {

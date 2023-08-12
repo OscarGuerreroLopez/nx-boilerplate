@@ -33,5 +33,5 @@ export type LoginUser = (params: LoginUserParams) => Promise<string>;
 export interface MakeLoginUserParams {
   repo: DbMethodsType;
   comparePassword: ComparePassword;
-  MakeToken: MakeTokenType;
+  makeToken: MakeTokenType;
 }

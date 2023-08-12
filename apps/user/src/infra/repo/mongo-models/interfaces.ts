@@ -5,7 +5,8 @@ export interface Model {
 }
 
 export interface UserModel extends Model {
-  name: string;
+  fname: string;
+  lname: string;
   email: string;
   password: string;
   role: string;
