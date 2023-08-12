@@ -33,7 +33,16 @@ npm-debug.log
 yarn-error.log
 testem.log
 /typings
+.verdaccio
+logs
+
 
 # System Files
 .DS_Store
 Thumbs.db
+
+# Envs
+.env
+.env.*
+*.env
+

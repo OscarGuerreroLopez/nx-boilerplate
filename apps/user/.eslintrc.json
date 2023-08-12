@@ -4,19 +4,14 @@
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
-      "extends": ["plugin:security/recommended"],
-      "rules": {
-        "no-console": "warn"
-      }
+      "rules": {}
     },
     {
       "files": ["*.ts", "*.tsx"],
-      "extends": ["plugin:security/recommended"],
       "rules": {}
     },
     {
       "files": ["*.js", "*.jsx"],
-      "extends": ["plugin:security/recommended"],
       "rules": {}
     }
   ]
