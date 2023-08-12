@@ -1,17 +1,18 @@
+import { NextFunction, Response } from 'express';
+import { FindUserByUserIdType } from '../../services/interfaces';
 import {
   AuthCommonType,
   CustomRequest,
   ErrorHandler,
   Severity,
 } from '@boilerplate/common';
-import { NextFunction, Response } from 'express';
-import { FindUserByUserIdType } from '../../services/interfaces';
+import { RoleTypeEnum } from '../../entities';
 
-export const MakeAuthUserMiddleware = (
+export const MakeAdminAuthMiddleware = (
   authCommon: AuthCommonType,
   findUserByUserId: FindUserByUserIdType
 ) => {
-  const authUserMiddleware = async (
+  const adminAuthMiddleware = async (
     request: CustomRequest,
     response: Response,
     next: NextFunction
@@ -30,7 +31,6 @@ export const MakeAuthUserMiddleware = (
       if (Object.keys(user).length === 0) {
         throw new Error(`User ${decodedToken.id} does not exist in DB`);
       }
-
       // in case user role has chnaged since token creation
       if (decodedToken.role !== user.role) {
         throw new Error(
@@ -45,16 +45,8 @@ export const MakeAuthUserMiddleware = (
         throw new Error(`User ${decodedToken.id} has changed location`);
       }
 
-      if (!user.fname || !user.lname) {
-        throw new Error('incomplete user in DB');
-      }
-
-      if (!user.email) {
-        throw new Error('email missing in user DB');
-      }
-
-      if (!user.userId) {
-        throw new Error('userId missing in user DB');
+      if (user.role !== RoleTypeEnum.ADMIN) {
+        throw new Error(`User ${user.userId} tried to execute an admin route`);
       }
 
       request.user = {
@@ -72,8 +64,8 @@ export const MakeAuthUserMiddleware = (
         additionalErrorInfo: {
           severity: Severity.WARN,
           service: 'boilerplate',
-          file: 'userAuth.middleware.ts',
-          property: 'authUserMiddleware',
+          file: 'adminAuth.middleware.ts',
+          property: 'adminAuthMiddleware',
           code: request.code,
           body: request.body,
           headers: request.headers,
@@ -84,5 +76,5 @@ export const MakeAuthUserMiddleware = (
     }
   };
 
-  return authUserMiddleware;
+  return adminAuthMiddleware;
 };

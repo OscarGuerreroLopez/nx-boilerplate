@@ -8,7 +8,7 @@ import {
 } from '../validators/user.validator';
 import { validatorMiddleware } from '@boilerplate/middleware';
 import { loginUserHandler } from '../handlers/loginUser';
-import { authUserMiddleware } from '../middleware';
+import { authUserMiddleware, authAdminMiddleware } from '../middleware';
 
 const router = Router();
 
@@ -19,7 +19,7 @@ router.post(
   asyncHandler(adduserHandler)
 );
 router.get('/', authUserMiddleware, asyncHandler(findUserHandler));
-router.get('/all', asyncHandler(findAllUsersHandler));
+router.get('/all', authAdminMiddleware, asyncHandler(findAllUsersHandler));
 router.post(
   '/login',
   userLoginValidator,
