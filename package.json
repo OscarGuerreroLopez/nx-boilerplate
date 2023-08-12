@@ -9,7 +9,8 @@
     "lint": "npm run lint:user",
     "serve:all": "rm -rf logs && npm run build:all && nx run-many --target=serve --projects=user --parallel",
     "build:all": "npm run lint && nx run-many --target=build --projects=user --parallel",
-    "serve:user": "npm run build:all && nx serve user"
+    "serve:user": "npm run build:all && nx serve user",
+    "graph": "nx graph"
   },
   "private": true,
   "dependencies": {
