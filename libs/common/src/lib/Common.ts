@@ -15,7 +15,3 @@ const buildJwt = BuildMakeVerifyJwt();
 export const makeToken = buildJwt.makeToken;
 export const verifyToken = buildJwt.verifyToken;
 export const authCommon = AuthCommon(verifyToken);
-
-export function common(): string {
-  return 'common';
-}
