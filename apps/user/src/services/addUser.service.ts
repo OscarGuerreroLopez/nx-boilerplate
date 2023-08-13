@@ -1,4 +1,4 @@
-import { makeUser, User } from '../entities';
+import { makeUser, StatusEnum, User } from '../entities';
 import { DbMethodsType } from '../infra/repo/dbMethods';
 import { AddUser, MakePassword } from './interfaces';
 
@@ -18,7 +18,7 @@ export const MakeAddUser = (
       email: validUser.getEmail(),
       role: validUser.getRole(),
       userId: validUser.getUserId(),
-      status: validUser.getUserStatus(),
+      status: StatusEnum.ACTIVE,
     });
 
     if (!result) {
