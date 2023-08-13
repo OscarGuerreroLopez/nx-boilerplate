@@ -58,4 +58,17 @@ describe('POST /user', () => {
     expect(response.data.result.role).toEqual('Guess');
     expect(response.data.result.status).toEqual('active');
   });
+
+  it('should fail if user tries to access admin route', async () => {
+    try {
+      await axios.get(`${BASE_URL}/user/all`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+    } catch (error) {
+      expect(error.response.status).toBe(401);
+      expect(error.response.data.message).toEqual('Not Authorized');
+    }
+  });
 });
