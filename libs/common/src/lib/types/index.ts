@@ -33,7 +33,7 @@ export interface MakeJwt {
 }
 
 export type AuthCommonType = (
-  token?: string,
-  userAgent?: string | undefined,
-  clientIp?: string | undefined
+  token: string,
+  userAgent: string,
+  clientIp: string
 ) => TokenPayload;
