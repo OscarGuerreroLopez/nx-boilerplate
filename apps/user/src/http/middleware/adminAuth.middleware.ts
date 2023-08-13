@@ -17,13 +17,11 @@ export const MakeAdminAuthMiddleware = (
     response: Response,
     next: NextFunction
   ) => {
-    const code = request.code;
+    const { code, clientIp } = request;
 
     try {
       const token = request.headers.authorization.split(' ')[1];
       const userAgent = request.headers['user-agent'];
-      const clientIp = request.clientIp;
-
       const decodedToken = authCommon(token, userAgent, clientIp);
 
       const user = await findUserByUserId(decodedToken.id);

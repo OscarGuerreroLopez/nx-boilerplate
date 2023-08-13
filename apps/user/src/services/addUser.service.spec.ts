@@ -41,18 +41,6 @@ describe('user service test', () => {
         expect(error.message).toStrictEqual('Invalid password');
       }
     });
-    it('should throw an error if password not correct', async () => {
-      try {
-        await AddUser({
-          fname: 'Oscar',
-          lname: 'Lopez',
-          email: 'oscar@oscar.com',
-          password: 'abc',
-        });
-      } catch (error) {
-        expect(error.message).toStrictEqual('Invalid password');
-      }
-    });
 
     it('should throw an error if missing paramst', async () => {
       try {

@@ -1,4 +1,4 @@
-import { buildMakeUser } from './buildMakeUser';
+import { BuildMakeUser } from './buildMakeUser';
 import { validateEmail, validatePassword } from '@boilerplate/common';
 
 const makeUUIDMock = () => {
@@ -6,7 +6,7 @@ const makeUUIDMock = () => {
 };
 
 describe('buildMakeUser Test', () => {
-  const userEntity = buildMakeUser({
+  const userEntity = BuildMakeUser({
     validateEmail,
     validatePassword,
     makeUUID: makeUUIDMock,
