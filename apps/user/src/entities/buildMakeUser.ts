@@ -31,6 +31,10 @@ export const BuildMakeUser: BuildMakeUserType = (params) => {
       user.role = RoleTypeEnum.GUESS;
     }
 
+    if (!user.failedAttempts) {
+      user.failedAttempts = 0;
+    }
+
     return Object.freeze({
       getFname: () => user.fname,
       getLname: () => user.lname,
@@ -39,6 +43,7 @@ export const BuildMakeUser: BuildMakeUserType = (params) => {
       getRole: () => user.role,
       getUserId: () => user.userId,
       getUserStatus: () => user.status,
+      getFailedAttempts: () => user.failedAttempts,
     });
   };
 

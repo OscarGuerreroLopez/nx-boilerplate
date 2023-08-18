@@ -1,12 +1,8 @@
 import { NextFunction, Response } from 'express';
 import { FindUserByUserIdType } from '../../services/interfaces';
-import {
-  AuthCommonType,
-  CustomRequest,
-  ErrorHandler,
-  Severity,
-} from '@boilerplate/common';
+import { AuthCommonType, ErrorHandler, Severity } from '@boilerplate/common';
 import { RoleTypeEnum, StatusEnum } from '../../entities';
+import { CustomRequest } from '../types';
 
 export const MakeAdminAuthMiddleware = (
   authCommon: AuthCommonType,

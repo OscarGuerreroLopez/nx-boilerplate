@@ -1,11 +1,12 @@
 import { Handler, Response } from 'express';
-import { CustomRequest, ErrorHandler, Severity } from '@boilerplate/common';
+import { ErrorHandler, Severity } from '@boilerplate/common';
 import {
   findAllUsers,
   findUserByEmail,
   findUserByUserId,
 } from '../../services';
 import { RoleTypeEnum } from '../../entities';
+import { CustomRequest } from '../types';
 
 export const findUserHandler: Handler = async (
   request: CustomRequest,

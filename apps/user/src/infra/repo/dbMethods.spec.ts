@@ -20,6 +20,7 @@ describe('DB methods test', () => {
       role: 'User',
       userId: '1',
       status: 'active',
+      failedAttempts: 0,
     });
 
     const user = await DbMethods('users').findOne<UserModel>({
@@ -103,6 +104,7 @@ describe('DB methods test', () => {
       role: 'Guess',
       userId: '2',
       status: 'active',
+      failedAttempts: 0,
     });
 
     // make sure it was inserted

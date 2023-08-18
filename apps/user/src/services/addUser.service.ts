@@ -19,6 +19,7 @@ export const MakeAddUser = (
       role: validUser.getRole(),
       userId: validUser.getUserId(),
       status: StatusEnum.ACTIVE,
+      failedAttempts: validUser.getFailedAttempts(),
     });
 
     if (!result) {

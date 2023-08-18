@@ -6,6 +6,7 @@ export interface UserEntity {
   getRole: () => RoleTypeEnum;
   getUserId: () => string;
   getUserStatus: () => StatusEnum;
+  getFailedAttempts: () => number;
 }
 
 export interface User {
@@ -16,6 +17,7 @@ export interface User {
   role: RoleTypeEnum;
   userId: string;
   status: StatusEnum;
+  failedAttempts: number;
 }
 
 export enum StatusEnum {

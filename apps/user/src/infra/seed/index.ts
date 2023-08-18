@@ -16,6 +16,7 @@ export const AddAdminUser = async (): Promise<void> => {
       role: 'Admin',
       userId: '8130k9',
       status: 'active',
+      failedAttempts: 0,
     };
 
     await DbMethods('users').insert<UserModel>(user);
@@ -43,6 +44,7 @@ export const AddUsers = async (): Promise<void> => {
       role: 'User',
       userId: 'AGHxYB',
       status: 'active',
+      failedAttempts: 0,
     };
 
     await DbMethods('users').insert<UserModel>(user);
@@ -61,6 +63,7 @@ export const AddUsers = async (): Promise<void> => {
       role: 'User',
       userId: 'gbH_us',
       status: 'active',
+      failedAttempts: 0,
     };
 
     await DbMethods('users').insert<UserModel>(user);

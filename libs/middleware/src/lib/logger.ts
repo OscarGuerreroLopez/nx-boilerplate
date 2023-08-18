@@ -1,11 +1,7 @@
 import { Response, NextFunction } from 'express';
 import { v4 as uuidv4 } from 'uuid';
-import {
-  ErrorHandler,
-  logger,
-  Severity,
-  CustomRequest,
-} from '@boilerplate/common';
+import { ErrorHandler, logger, Severity } from '@boilerplate/common';
+import { CustomRequest } from './types';
 
 export const LoggerMiddleware = (
   request: CustomRequest,

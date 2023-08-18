@@ -7,6 +7,7 @@ export * from './password';
 export * from './bodySanitation';
 export * from './errorHandler';
 export * from './types';
+export * from './exceptions';
 
 import { BuildMakeVerifyJwt } from './jwt';
 import { AuthCommon } from './authCommon';

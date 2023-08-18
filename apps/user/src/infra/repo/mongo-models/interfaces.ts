@@ -12,4 +12,5 @@ export interface UserModel extends Model {
   role: string;
   userId: string;
   status: string;
+  failedAttempts: number;
 }

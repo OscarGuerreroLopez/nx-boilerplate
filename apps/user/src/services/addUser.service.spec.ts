@@ -33,7 +33,6 @@ describe('user service test', () => {
 
       const newUser = await findUserByEmail('oscar@oscar.com');
 
-      console.log('@@@111', newUser);
       expect(newUser.role).toBe('Guess');
       expect(newUser.status).toBe('active');
     });

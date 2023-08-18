@@ -1,13 +1,19 @@
 import { Handler, Response } from 'express';
-import { loginUser } from '../../services';
-import { CustomRequest, ErrorHandler, Severity } from '@boilerplate/common';
+import { LoginUserParams, loginUser } from '../../services';
+import {
+  AccountLockError,
+  BadPasswordError,
+  ErrorHandler,
+  Severity,
+} from '@boilerplate/common';
+import { CustomRequest } from '../types';
 
 export const loginUserHandler: Handler = async (
   request: CustomRequest,
   response: Response
 ) => {
   try {
-    const params = {
+    const params: LoginUserParams = {
       ...request.body,
       userAgent: request.headers['user-agent'],
       clientIp: request.clientIp,
@@ -37,7 +43,21 @@ export const loginUserHandler: Handler = async (
       },
     });
 
-    return response.status(500).send({
+    if (error instanceof AccountLockError) {
+      return response.status(error.status).send({
+        message: 'Locked Account',
+        code: request.code,
+      });
+    }
+
+    if (error instanceof BadPasswordError) {
+      return response.status(error.status).send({
+        message: 'Issue with the login',
+        code: request.code,
+      });
+    }
+
+    return response.status(400).send({
       message: 'Login issue, check logs',
       code: request.code,
     });

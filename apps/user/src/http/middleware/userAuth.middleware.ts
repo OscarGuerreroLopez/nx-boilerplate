@@ -1,12 +1,8 @@
-import {
-  AuthCommonType,
-  CustomRequest,
-  ErrorHandler,
-  Severity,
-} from '@boilerplate/common';
+import { AuthCommonType, ErrorHandler, Severity } from '@boilerplate/common';
 import { NextFunction, Response } from 'express';
 import { FindUserByUserIdType } from '../../services/interfaces';
 import { StatusEnum } from '../../entities';
+import { CustomRequest } from '../types';
 
 export const MakeAuthUserMiddleware = (
   authCommon: AuthCommonType,
