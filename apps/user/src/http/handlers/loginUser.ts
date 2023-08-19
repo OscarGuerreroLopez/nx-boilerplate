@@ -1,13 +1,14 @@
 import { Handler, Response } from 'express';
-import { loginUser } from '../../services';
-import { CustomRequest, ErrorHandler, Severity } from '@boilerplate/common';
+import { LoginUserParams, loginUser } from '../../services';
+import { ErrorHandler, Severity } from '@boilerplate/common';
+import { CustomRequest } from '../types';
 
 export const loginUserHandler: Handler = async (
   request: CustomRequest,
   response: Response
 ) => {
   try {
-    const params = {
+    const params: LoginUserParams = {
       ...request.body,
       userAgent: request.headers['user-agent'],
       clientIp: request.clientIp,
@@ -37,7 +38,7 @@ export const loginUserHandler: Handler = async (
       },
     });
 
-    return response.status(500).send({
+    return response.status(error.status || 500).send({
       message: 'Login issue, check logs',
       code: request.code,
     });

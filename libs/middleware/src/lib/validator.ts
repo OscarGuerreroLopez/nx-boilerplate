@@ -1,7 +1,8 @@
 import { Response, NextFunction } from 'express';
-import { CustomRequest } from '@boilerplate/common';
+
 import { validationResult } from 'express-validator';
 import { ErrorHandler, Severity } from '@boilerplate/common';
+import { CustomRequest } from './types';
 
 export const validatorMiddleware = (
   request: CustomRequest,

@@ -1,22 +1,7 @@
-import { Request } from 'express';
 export type IObjectLiteral = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any;
 };
-
-export type RequestUser = {
-  fname: string;
-  lname: string;
-  email: string;
-  role: string;
-  userId: string;
-};
-
-export interface CustomRequest extends Request {
-  code: string;
-  user: RequestUser;
-  clientIp: string;
-}
 
 export interface TokenPayload {
   id: string;
@@ -33,7 +18,23 @@ export interface MakeJwt {
 }
 
 export type AuthCommonType = (
-  token?: string,
-  userAgent?: string | undefined,
-  clientIp?: string | undefined
+  token: string,
+  userAgent: string,
+  clientIp: string
 ) => TokenPayload;
+
+export enum Severity {
+  INFO = 'info',
+  WARN = 'warn',
+  ERROR = 'error',
+}
+
+export interface BoilerplateLogger {
+  service: string;
+  file: string;
+  method?: string;
+  code: string;
+  [key: string]: any;
+}
+
+export type SeverityType = 'info' | 'warn' | 'error';

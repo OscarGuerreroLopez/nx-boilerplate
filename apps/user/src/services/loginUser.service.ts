@@ -1,5 +1,10 @@
 import { User } from '../entities';
 import { LoginUser, LoginUserParams, MakeLoginUserParams } from './interfaces';
+import {
+  AccountLockError,
+  UnauthorizeError,
+  UserNotFoundError,
+} from '@boilerplate/common';
 
 export const MakeLoginUser = ({
   repo,
@@ -12,26 +17,31 @@ export const MakeLoginUser = ({
     userAgent,
     clientIp,
   }: LoginUserParams) => {
-    const userExists = await repo('users').find<User>({
-      email,
-    });
+    const user = await repo('users').findOne<User>({ email: email });
 
-    if (Object.keys(userExists).length !== 1) {
-      throw Error(
-        `User with email ${email} does not exists or there are many matches`
+    if (!(Object.keys(user).length > 0)) {
+      throw new UserNotFoundError(`User with email ${email} does not exists`);
+    }
+
+    if (user.failedAttempts >= 3) {
+      throw new AccountLockError(`User ${user.userId} is blocked`);
+    }
+
+    const passwordMatch = await comparePassword(password, user.password);
+
+    if (!passwordMatch) {
+      await repo('users').updateOne<User>(
+        { userId: user.userId },
+        { failedAttempts: user.failedAttempts + 1 }
       );
+      throw new UnauthorizeError(`User with email ${email} wrong password`);
     }
 
-    const user = userExists[0];
-
-    if (!user.userId) {
-      throw Error(`Missing id for the user ${user.email}`);
-    }
-
-    const result = await comparePassword(password, user.password);
-
-    if (!result) {
-      throw Error(`User with email ${email} wrong password`);
+    if (user.failedAttempts !== 0) {
+      await repo('users').updateOne<User>(
+        { userId: user.userId },
+        { failedAttempts: 0 }
+      );
     }
 
     const token = makeToken({

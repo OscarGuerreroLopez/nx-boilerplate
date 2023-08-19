@@ -1,24 +1,9 @@
 import * as winston from 'winston';
 import { EnvVars, NodeEnvEnum } from './validateEnv';
 import { SanitiseBody } from './bodySanitation';
+import { BoilerplateLogger, Severity } from './types';
 
 const { combine, timestamp, prettyPrint } = winston.format;
-
-export enum Severity {
-  INFO = 'info',
-  WARN = 'warn',
-  ERROR = 'error',
-}
-
-interface BoilerplateLogger {
-  service: string;
-  file: string;
-  method?: string;
-  code: string;
-  [key: string]: any;
-}
-
-export type SeverityType = 'info' | 'warn' | 'error';
 
 const WinstonLogger = winston.createLogger({
   // level: "info",

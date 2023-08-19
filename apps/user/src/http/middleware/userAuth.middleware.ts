@@ -1,11 +1,15 @@
 import {
+  AccountLockError,
   AuthCommonType,
-  CustomRequest,
   ErrorHandler,
   Severity,
+  UnauthorizeError,
+  UserNotFoundError,
 } from '@boilerplate/common';
 import { NextFunction, Response } from 'express';
 import { FindUserByUserIdType } from '../../services/interfaces';
+import { StatusEnum } from '../../entities';
+import { CustomRequest } from '../types';
 
 export const MakeAuthUserMiddleware = (
   authCommon: AuthCommonType,
@@ -16,24 +20,26 @@ export const MakeAuthUserMiddleware = (
     response: Response,
     next: NextFunction
   ) => {
-    const code = request.code;
+    const { code, clientIp } = request;
 
     try {
       const token = request.headers.authorization.split(' ')[1];
       const userAgent = request.headers['user-agent'];
-      const clientIp = request.clientIp;
-
       const decodedToken = authCommon(token, userAgent, clientIp);
 
       const user = await findUserByUserId(decodedToken.id);
 
       if (Object.keys(user).length === 0) {
-        throw new Error(`User ${decodedToken.id} does not exist in DB`);
+        throw new UserNotFoundError(
+          `User ${decodedToken.id} does not exist in DB`
+        );
       }
-
+      if (user.status !== StatusEnum.ACTIVE) {
+        throw new AccountLockError(`User ${user.userId} is not active `);
+      }
       // in case user role has chnaged since token creation
       if (decodedToken.role !== user.role) {
-        throw new Error(
+        throw new UnauthorizeError(
           `user in the token has role ${decodedToken.role} and in the DB ${user.role} `
         );
       }
@@ -42,19 +48,9 @@ export const MakeAuthUserMiddleware = (
         decodedToken.userAgent !== userAgent ||
         decodedToken.clientIp !== clientIp
       ) {
-        throw new Error(`User ${decodedToken.id} has changed location`);
-      }
-
-      if (!user.fname || !user.lname) {
-        throw new Error('incomplete user in DB');
-      }
-
-      if (!user.email) {
-        throw new Error('email missing in user DB');
-      }
-
-      if (!user.userId) {
-        throw new Error('userId missing in user DB');
+        throw new UnauthorizeError(
+          `User ${decodedToken.id} has changed location`
+        );
       }
 
       request.user = {

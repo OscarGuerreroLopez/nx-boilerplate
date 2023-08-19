@@ -2,10 +2,13 @@ import { DbMethods, LoadMethods } from '../infra/repo/dbMethods';
 import { MakeAddUser } from './addUser.service';
 import { BuildPassword } from '@boilerplate/common';
 import { TestConnection } from '../infra/mongo-db/testConnection';
+import { MakeFindUser } from './findUser.service';
 
 describe('user service test', () => {
   const buildPassword = BuildPassword(10);
   const makePassword = buildPassword.makePassword;
+  const removePassword = buildPassword.removePassword;
+  const { findUserByEmail } = MakeFindUser(DbMethods, removePassword);
 
   const AddUser = MakeAddUser(DbMethods, makePassword);
 
@@ -27,20 +30,13 @@ describe('user service test', () => {
       });
 
       expect(result).toBeTruthy();
+
+      const newUser = await findUserByEmail('oscar@oscar.com');
+
+      expect(newUser.role).toBe('Guess');
+      expect(newUser.status).toBe('active');
     });
 
-    it('should throw an error if password not correct', async () => {
-      try {
-        await AddUser({
-          fname: 'Oscar',
-          lname: 'Lopez',
-          email: 'oscar@oscar.com',
-          password: 'abc',
-        });
-      } catch (error) {
-        expect(error.message).toStrictEqual('Invalid password');
-      }
-    });
     it('should throw an error if password not correct', async () => {
       try {
         await AddUser({

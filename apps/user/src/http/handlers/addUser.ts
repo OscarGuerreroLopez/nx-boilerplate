@@ -1,7 +1,8 @@
 import { Handler, Response } from 'express';
-import { CustomRequest, ErrorHandler, Severity } from '@boilerplate/common';
+import { ErrorHandler, Severity } from '@boilerplate/common';
 import { User } from '../../entities/interfaces';
 import { addUser } from '../../services';
+import { CustomRequest } from '../types';
 
 export const adduserHandler: Handler = async (
   request: CustomRequest,
@@ -30,7 +31,7 @@ export const adduserHandler: Handler = async (
       },
     });
     return response
-      .status(400)
+      .status(error.status || 400)
       .send({ msg: 'bad request', code: request.code });
   }
 };

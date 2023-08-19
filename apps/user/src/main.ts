@@ -10,6 +10,7 @@ import {
 import Router from './http/router';
 import { LoadMethods } from './infra/repo/dbMethods';
 import { AddAdminUser, AddUsers } from './infra/seed';
+import { exceptionMiddleware } from './http/middleware';
 
 const host = EnvVars.HOST ?? 'localhost';
 const port = EnvVars.PORT ? Number(process.env.PORT) : 3001;
@@ -21,6 +22,8 @@ expressEssentials(app);
 expressRequestIp(app);
 app.use(LoggerMiddleware);
 app.use(Router);
+
+app.use(exceptionMiddleware);
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 process.on('uncaughtException', (e: any) => {

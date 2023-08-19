@@ -11,4 +11,6 @@ export interface UserModel extends Model {
   password: string;
   role: string;
   userId: string;
+  status: string;
+  failedAttempts: number;
 }

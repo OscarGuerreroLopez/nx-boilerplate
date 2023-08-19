@@ -65,7 +65,7 @@ describe('Login user test', () => {
       });
     } catch (error) {
       expect(error.message).toStrictEqual(
-        'User with email pepe@oscar.com does not exists or there are many matches'
+        'User with email pepe@oscar.com does not exists'
       );
     }
   });

@@ -1,1 +1,1 @@
-export * from './lib/Middleware';
+export * from './lib/middleware';

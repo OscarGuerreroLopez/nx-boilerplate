@@ -1,11 +1,17 @@
 import { Handler, Response } from 'express';
-import { CustomRequest, ErrorHandler, Severity } from '@boilerplate/common';
+import {
+  ErrorHandler,
+  Severity,
+  UnauthorizeError,
+  WrongParamsError,
+} from '@boilerplate/common';
 import {
   findAllUsers,
   findUserByEmail,
   findUserByUserId,
 } from '../../services';
 import { RoleTypeEnum } from '../../entities';
+import { CustomRequest } from '../types';
 
 export const findUserHandler: Handler = async (
   request: CustomRequest,
@@ -20,7 +26,7 @@ export const findUserHandler: Handler = async (
     let result;
 
     if (!email && !userId) {
-      throw new Error('Invalid query params');
+      throw new WrongParamsError('Invalid query params');
     }
 
     const isAdminOrUser =
@@ -33,7 +39,7 @@ export const findUserHandler: Handler = async (
     } else if (userId && isAdminOrUser) {
       result = await findUserByUserId(userId);
     } else {
-      throw new Error(
+      throw new UnauthorizeError(
         `User ${user.userId} is trying to access information for user ${
           email || userId
         }`
@@ -57,7 +63,9 @@ export const findUserHandler: Handler = async (
         method: `Method: ${request.method}, path: ${request.path}, host:${request.hostname}`,
       },
     });
-    return response.status(400).send({ msg: 'bad request' });
+    return response
+      .status(error.status || 400)
+      .send({ msg: 'bad request', code: request.code });
   }
 };
 
@@ -73,6 +81,8 @@ export const findAllUsersHandler: Handler = async (
     });
   } catch (error) {
     console.error(error);
-    return response.status(400).send({ msg: 'bad request' });
+    return response
+      .status(error.status || 400)
+      .send({ msg: 'bad request', code: request.code });
   }
 };
