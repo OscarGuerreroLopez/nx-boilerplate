@@ -1,3 +1,27 @@
+import passwordValidator from 'password-validator';
+import { MakeUseError } from './exceptions';
+
 export const validatePassword = (password: string): boolean => {
-  return /^(?=.*?\d)(?=.*?[a-zA-Z])[a-zA-Z\d]+$/.test(password);
+  const schema = new passwordValidator();
+
+  schema
+    .is()
+    .min(6)
+    .is()
+    .max(16)
+    .has()
+    .uppercase()
+    .has()
+    .lowercase()
+    .has()
+    .digits(1)
+    .has()
+    .not()
+    .spaces()
+    .has()
+    .symbols(1);
+
+  const result = schema.validate(password) as boolean;
+
+  return result;
 };
