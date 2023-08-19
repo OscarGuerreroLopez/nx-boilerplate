@@ -1,6 +1,6 @@
 import bcrypt from 'bcryptjs';
 import _ from 'underscore';
-import { IObjectLiteral } from './common';
+import { IObjectLiteral } from '.';
 
 export type MakePassword = (plainPassword: string) => Promise<string>;
 export type ComparePassword = (

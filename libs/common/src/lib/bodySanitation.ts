@@ -1,4 +1,4 @@
-import { IObjectLiteral } from './common';
+import { IObjectLiteral } from '.';
 
 export const SanitiseBody = (
   unsanitisedBody: IObjectLiteral

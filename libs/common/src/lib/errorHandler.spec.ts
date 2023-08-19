@@ -1,5 +1,5 @@
 import { ErrorHandler } from './errorHandler'; // Update with the correct import path
-import { logger, Severity } from './common';
+import { logger, Severity } from '.';
 // Mock the logger module
 jest.mock('./common', () => {
   const originalModule = jest.requireActual('./common');

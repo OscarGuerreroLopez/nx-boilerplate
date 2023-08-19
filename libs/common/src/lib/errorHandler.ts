@@ -1,4 +1,4 @@
-import { logger, SeverityType, IObjectLiteral } from './common';
+import { logger, SeverityType, IObjectLiteral } from '.';
 
 export interface AdditionalErrorInfo {
   severity: SeverityType;
