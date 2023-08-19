@@ -1,12 +1,11 @@
 import { NextFunction, Response } from 'express';
 import { FindUserByUserIdType } from '../../services/interfaces';
 import {
-  AccountLockError,
   AuthCommonType,
   ErrorHandler,
   Severity,
-  UnauthorizeError,
-  UserNotFoundError,
+  AppError,
+  CommomErrors,
 } from '@boilerplate/common';
 import { RoleTypeEnum, StatusEnum } from '../../entities';
 import { CustomRequest } from '../types';
@@ -30,17 +29,22 @@ export const MakeAdminAuthMiddleware = (
       const user = await findUserByUserId(decodedToken.id);
 
       if (Object.keys(user).length === 0) {
-        throw new UserNotFoundError(
+        throw new AppError(
+          CommomErrors.USER_NOT_FOUND,
           `User ${decodedToken.id} does not exist in DB`
         );
       }
 
       if (user.status !== StatusEnum.ACTIVE) {
-        throw new AccountLockError(`User ${user.userId} is not active `);
+        throw new AppError(
+          CommomErrors.USER_LOCKED,
+          `User ${user.userId} is not active `
+        );
       }
       // in case user role has chnaged since token creation
       if (decodedToken.role !== user.role) {
-        throw new UnauthorizeError(
+        throw new AppError(
+          CommomErrors.USER_UNAUTHORIZED,
           `user in the token has role ${decodedToken.role} and in the DB ${user.role} `
         );
       }
@@ -49,13 +53,15 @@ export const MakeAdminAuthMiddleware = (
         decodedToken.userAgent !== userAgent ||
         decodedToken.clientIp !== clientIp
       ) {
-        throw new UnauthorizeError(
+        throw new AppError(
+          CommomErrors.USER_LOCATION,
           `User ${decodedToken.id} has changed location`
         );
       }
 
       if (user.role !== RoleTypeEnum.ADMIN) {
-        throw new UnauthorizeError(
+        throw new AppError(
+          CommomErrors.USER_UNAUTHORIZED,
           `User ${user.userId} tried to execute an admin route`
         );
       }

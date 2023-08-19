@@ -1,5 +1,4 @@
 import passwordValidator from 'password-validator';
-import { MakeUseError } from './exceptions';
 
 export const validatePassword = (password: string): boolean => {
   const schema = new passwordValidator();

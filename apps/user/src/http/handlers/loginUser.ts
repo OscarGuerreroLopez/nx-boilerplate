@@ -1,6 +1,6 @@
 import { Handler, Response } from 'express';
 import { LoginUserParams, loginUser } from '../../services';
-import { ErrorHandler, Severity } from '@boilerplate/common';
+import { AppError, ErrorHandler, Severity } from '@boilerplate/common';
 import { CustomRequest } from '../types';
 
 export const loginUserHandler: Handler = async (
@@ -38,7 +38,7 @@ export const loginUserHandler: Handler = async (
       },
     });
 
-    return response.status(error.status || 500).send({
+    return response.status(error.httpCode || 500).send({
       message: 'Login issue, check logs',
       code: request.code,
     });

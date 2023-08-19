@@ -3,25 +3,28 @@ import {
   MakeUser,
   RoleTypeEnum,
 } from './interfaces';
-import { MakeUseError } from '@boilerplate/common';
+import { AppError, CommomErrors } from '@boilerplate/common';
 
 export const BuildMakeUser: BuildMakeUserType = (params) => {
   const { validateEmail, validatePassword, makeUUID } = params;
 
   const makeUser: MakeUser = (user) => {
     if (!user.fname || !user.lname || !user.email || !user.password) {
-      throw new MakeUseError('Missing user params');
+      throw new AppError(
+        CommomErrors.MAKE_USER_PARAMS,
+        'Some user params were missing'
+      );
     }
 
     const isValidEmail = validateEmail(user.email);
     const isValidPassword = validatePassword(user.password);
 
     if (!isValidEmail) {
-      throw new MakeUseError('Invalid email');
+      throw new AppError(CommomErrors.MAKE_USER_EMAIL, 'Invalid email');
     }
 
     if (!isValidPassword) {
-      throw new MakeUseError('Invalid password');
+      throw new AppError(CommomErrors.MAKE_USER_PASSWORD, 'Invalid password');
     }
 
     if (!user.userId) {
