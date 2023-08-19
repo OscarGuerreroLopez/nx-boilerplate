@@ -1,3 +1,4 @@
+import { UnauthorizeError } from './exceptions';
 import { AuthCommonType, VerifyTokenType, TokenPayload } from './types';
 
 export const AuthCommon = (verifyToken: VerifyTokenType): AuthCommonType => {
@@ -5,7 +6,7 @@ export const AuthCommon = (verifyToken: VerifyTokenType): AuthCommonType => {
     const decoded = verifyToken(token);
 
     if (decoded.userAgent !== userAgent || decoded.clientIp !== clientIp) {
-      throw new Error(`User ${decoded.id} has changed location`);
+      throw new UnauthorizeError(`User ${decoded.id} has changed location`);
     }
 
     return {

@@ -1,4 +1,4 @@
-export class BadPasswordError extends Error {
+export class UnauthorizeError extends Error {
   status: number;
   override message: string;
   constructor(message: string) {

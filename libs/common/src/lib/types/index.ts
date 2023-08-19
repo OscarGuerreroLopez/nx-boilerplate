@@ -22,3 +22,19 @@ export type AuthCommonType = (
   userAgent: string,
   clientIp: string
 ) => TokenPayload;
+
+export enum Severity {
+  INFO = 'info',
+  WARN = 'warn',
+  ERROR = 'error',
+}
+
+export interface BoilerplateLogger {
+  service: string;
+  file: string;
+  method?: string;
+  code: string;
+  [key: string]: any;
+}
+
+export type SeverityType = 'info' | 'warn' | 'error';

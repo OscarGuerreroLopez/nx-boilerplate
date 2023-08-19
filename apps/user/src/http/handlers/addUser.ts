@@ -31,7 +31,7 @@ export const adduserHandler: Handler = async (
       },
     });
     return response
-      .status(400)
+      .status(error.status || 400)
       .send({ msg: 'bad request', code: request.code });
   }
 };

@@ -11,7 +11,7 @@ export const MakeAddUser = (
 
     const hashPassword = await makePassword(validUser.getPassword());
 
-    const result = await repo('users').insert<User>({
+    await repo('users').insert<User>({
       fname: validUser.getFname(),
       lname: validUser.getLname(),
       password: hashPassword,
@@ -21,10 +21,6 @@ export const MakeAddUser = (
       status: StatusEnum.ACTIVE,
       failedAttempts: validUser.getFailedAttempts(),
     });
-
-    if (!result) {
-      throw new Error('Not able to insert user');
-    }
 
     return true;
   };
