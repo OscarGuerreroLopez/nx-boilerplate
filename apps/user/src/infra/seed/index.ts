@@ -6,7 +6,7 @@ export const AddAdminUser = async (): Promise<void> => {
   try {
     const buildPassword = BuildPassword(10);
     const makePassword = buildPassword.makePassword;
-    const hashPassword = await makePassword('Abc123');
+    const hashPassword = await makePassword('AAbbc123@');
 
     const user = {
       fname: 'Oscar',
@@ -35,7 +35,7 @@ export const AddUsers = async (): Promise<void> => {
   try {
     const buildPassword = BuildPassword(10);
     const makePassword = buildPassword.makePassword;
-    const hashPassword = await makePassword('Abc123');
+    const hashPassword = await makePassword('AAbbc123@');
     let user = {
       fname: 'User1',
       lname: 'bla',

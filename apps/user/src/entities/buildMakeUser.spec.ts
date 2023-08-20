@@ -16,7 +16,7 @@ describe('buildMakeUser Test', () => {
       fname: 'Oscar',
       lname: 'Lopez',
       email: 'oscar@oscar.com',
-      password: 'Abc123',
+      password: 'AAbbc123@',
     });
 
     const fname = user.getFname();
@@ -39,7 +39,7 @@ describe('buildMakeUser Test', () => {
         password: 'abc',
       });
     } catch (error) {
-      expect(error.message).toStrictEqual('Invalid password');
+      expect(error.message).toStrictEqual('Invalid password entered');
     }
   });
 });

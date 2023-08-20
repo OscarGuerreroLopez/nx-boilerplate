@@ -24,7 +24,7 @@ describe('find users test', () => {
       fname: 'Oscar',
       lname: 'Lopez',
       email: 'oscar@oscar.com',
-      password: 'Abc123',
+      password: 'AAbbc123@',
     });
 
     mockMakeUUID.mockReturnValue('222');
@@ -32,7 +32,7 @@ describe('find users test', () => {
       fname: 'Oscar',
       lname: 'Lopez',
       email: 'oscar2@oscar.com',
-      password: 'Abc123',
+      password: 'AAbbc123@',
     });
 
     mockMakeUUID.mockReturnValue('333');
@@ -40,7 +40,7 @@ describe('find users test', () => {
       fname: 'Oscar',
       lname: 'Lopez',
       email: 'oscar3@oscar.com',
-      password: 'Abc123',
+      password: 'AAbbc123@',
     });
   }, 120000);
 

@@ -21,7 +21,5 @@ export class AppError extends Error {
 
     this.name = name;
     this.httpCode = errorMap[name];
-
-    Error.captureStackTrace(this);
   }
 }

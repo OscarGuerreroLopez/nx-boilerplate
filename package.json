@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "test": " nx run-many --all --target=test",
+    "test": "nx reset && nx run-many --all --target=test",
     "test:user": "nx test user",
     "test:common": "nx test common",
     "test:user:e2e": "nx e2e user-e2e",

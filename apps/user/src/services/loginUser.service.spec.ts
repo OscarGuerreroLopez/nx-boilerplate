@@ -30,7 +30,7 @@ describe('Login user test', () => {
       fname: 'Oscar',
       lname: 'Lopez',
       email: 'oscar@oscar.com',
-      password: 'Abc123',
+      password: 'AAbbc123@',
     });
   }, 120000);
 
@@ -41,7 +41,7 @@ describe('Login user test', () => {
   it('should return the right token', async () => {
     const result = await loginUser({
       email: 'oscar@oscar.com',
-      password: 'Abc123',
+      password: 'AAbbc123@',
       clientIp: '0.0.0.1',
       userAgent: 'fakeUserAgent',
     });
@@ -59,7 +59,7 @@ describe('Login user test', () => {
     try {
       await loginUser({
         email: 'pepe@oscar.com',
-        password: 'Abc123',
+        password: 'AAbbc123@',
         clientIp: '0.0.0.1',
         userAgent: 'fakeUserAgent',
       });
@@ -79,9 +79,7 @@ describe('Login user test', () => {
         userAgent: 'fakeUserAgent',
       });
     } catch (error) {
-      expect(error.message).toStrictEqual(
-        'User with email oscar@oscar.com wrong password'
-      );
+      expect(error.message).toStrictEqual('password mismatch');
     }
   });
 });

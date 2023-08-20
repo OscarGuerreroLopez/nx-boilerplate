@@ -9,7 +9,7 @@ describe('POST /user', () => {
       fname: 'Oscar',
       lname: 'Lopez',
       email: 'oscar@oscar.com',
-      password: 'Abc123',
+      password: 'AAbbc123@',
     };
 
     const response = await axios.post(`${BASE_URL}/user`, userData, {});
@@ -36,7 +36,7 @@ describe('POST /user', () => {
   it('should login a user', async () => {
     const userData = {
       email: 'oscar@oscar.com',
-      password: 'Abc123',
+      password: 'AAbbc123@',
     };
 
     const response = await axios.post(`${BASE_URL}/user/login`, userData);
@@ -78,7 +78,7 @@ describe('POST /user', () => {
         fname: 'Oscar',
         lname: 'Lopez',
         email: 'oscar@oscar.com',
-        password: 'Abc123',
+        password: 'AAbbc123@',
         extraField: 'should reject this',
       };
 

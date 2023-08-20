@@ -24,7 +24,10 @@ export const BuildMakeUser: BuildMakeUserType = (params) => {
     }
 
     if (!isValidPassword) {
-      throw new AppError(CommomErrors.MAKE_USER_PASSWORD, 'Invalid password');
+      throw new AppError(
+        CommomErrors.MAKE_USER_PASSWORD,
+        'Invalid password entered'
+      );
     }
 
     if (!user.userId) {

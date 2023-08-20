@@ -16,7 +16,7 @@ describe('DB methods test', () => {
       fname: 'Oscar',
       lname: 'blabla',
       email: 'oscar@oscar.com',
-      password: 'Abc123',
+      password: 'AAbbc123',
       role: 'User',
       userId: '1',
       status: 'active',
@@ -29,7 +29,7 @@ describe('DB methods test', () => {
 
     expect(result).toBeTruthy();
     expect(user.fname).toStrictEqual('Oscar');
-    expect(user.password).toStrictEqual('Abc123');
+    expect(user.password).toStrictEqual('AAbbc123');
     expect(user.email).toStrictEqual('oscar@oscar.com');
   });
 
@@ -49,12 +49,12 @@ describe('DB methods test', () => {
       {
         fname: 'Oscar',
         email: 'oscar@oscar.com',
-        password: 'Abc123',
+        password: 'AAbbc123',
       },
       {
         fname: 'Oscar',
         email: 'oscar@oscar.es',
-        password: 'Abc123',
+        password: 'AAbbc123',
       }
     );
 
@@ -64,7 +64,7 @@ describe('DB methods test', () => {
 
     expect(result).toBeTruthy();
     expect(user.fname).toStrictEqual('Oscar');
-    expect(user.password).toStrictEqual('Abc123');
+    expect(user.password).toStrictEqual('AAbbc123');
     expect(user.email).toStrictEqual('oscar@oscar.es');
   });
 
@@ -74,13 +74,13 @@ describe('DB methods test', () => {
         fname: 'Maria',
         lname: 'blabla',
         email: 'maria@gmail.com',
-        password: 'Abc123',
+        password: 'AAbbc123',
       },
       {
         fname: 'Maria2',
         lname: 'blabla2',
         email: 'maria@hotmail.com',
-        password: 'Abc123',
+        password: 'AbAbc123',
       }
     );
 
@@ -91,7 +91,7 @@ describe('DB methods test', () => {
     expect(result).toBeTruthy();
     expect(user.fname).toStrictEqual('Maria2');
     expect(user.lname).toStrictEqual('blabla2');
-    expect(user.password).toStrictEqual('Abc123');
+    expect(user.password).toStrictEqual('AbAbc123');
     expect(user.email).toStrictEqual('maria@hotmail.com');
   });
 
@@ -100,7 +100,7 @@ describe('DB methods test', () => {
       fname: 'Oscar',
       lname: 'bla',
       email: 'oscar555@oscar.com',
-      password: 'Abc123',
+      password: 'AAbbc123',
       role: 'Guess',
       userId: '2',
       status: 'active',
