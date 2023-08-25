@@ -1,5 +1,5 @@
 import { BuildMakeUser } from './buildMakeUser';
-import { validateEmail, validatePassword } from '@boilerplate/common';
+import { validateEmail, validatePassword, AppError } from '@boilerplate/common';
 
 const makeUUIDMock = () => {
   return 'abc123fgtu';
@@ -40,6 +40,7 @@ describe('buildMakeUser Test', () => {
       });
     } catch (error) {
       expect(error.message).toStrictEqual('Invalid password entered');
+      expect(error).toBeInstanceOf(AppError);
     }
   });
 });
