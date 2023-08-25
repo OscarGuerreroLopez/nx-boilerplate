@@ -26,7 +26,7 @@ describe('user service test', () => {
         fname: 'Oscar',
         lname: 'Lopez',
         email: 'oscar@oscar.com',
-        password: 'Abc123',
+        password: 'AAbbc123@',
       });
 
       expect(result).toBeTruthy();
@@ -46,7 +46,7 @@ describe('user service test', () => {
           password: 'abc',
         });
       } catch (error) {
-        expect(error.message).toStrictEqual('Invalid password');
+        expect(error.message).toStrictEqual('Invalid password entered');
       }
     });
 
@@ -57,7 +57,7 @@ describe('user service test', () => {
           lname: 'Lopez',
         });
       } catch (error) {
-        expect(error.message).toStrictEqual('Missing user params');
+        expect(error.message).toStrictEqual('Some user params were missing');
       }
     });
   });

@@ -38,3 +38,23 @@ export interface BoilerplateLogger {
 }
 
 export type SeverityType = 'info' | 'warn' | 'error';
+
+export enum HttpCode {
+  OK = 200,
+  BAD_REQUEST = 400,
+  UNAUTHORIZED = 401,
+  FORBIDDEN = 403,
+  NOT_FOUND = 404,
+  INTERNAL_SERVER_ERROR = 500,
+}
+
+export enum CommomErrors {
+  BAD_PASSWORD = 'Bad password',
+  MAKE_USER_PARAMS = 'Missing user params',
+  MAKE_USER_EMAIL = 'Bad Email',
+  MAKE_USER_PASSWORD = 'Invalid password',
+  USER_NOT_FOUND = 'User not found',
+  USER_LOCKED = 'User account Blocked',
+  USER_LOCATION = 'User chnaged location',
+  USER_UNAUTHORIZED = 'User Unauthorized',
+}

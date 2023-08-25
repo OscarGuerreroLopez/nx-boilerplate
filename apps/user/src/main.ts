@@ -1,5 +1,5 @@
 import express from 'express';
-import { EnvVars } from '@boilerplate/common';
+import { EnvVars, logger } from '@boilerplate/common';
 import {
   expressSecureHeaders,
   expressRateLimiter,
@@ -27,14 +27,20 @@ app.use(exceptionMiddleware);
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 process.on('uncaughtException', (e: any) => {
-  console.error({ type: 'uncaughtException', e });
-  process.exit(1);
+  logger.error('uncaughtException', e);
+
+  setTimeout(() => {
+    process.exit(1);
+  }, 2000);
 });
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 process.on('unhandledRejection', (e: any) => {
-  console.error({ type: 'unhandledRejection', e });
-  process.exit(1);
+  logger.error('unhandledRejection', e);
+
+  setTimeout(() => {
+    process.exit(1);
+  }, 2000);
 });
 
 app.listen(port, host, async () => {

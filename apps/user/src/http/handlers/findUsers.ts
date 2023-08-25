@@ -1,9 +1,9 @@
 import { Handler, Response } from 'express';
 import {
+  AppError,
+  CommomErrors,
   ErrorHandler,
   Severity,
-  UnauthorizeError,
-  WrongParamsError,
 } from '@boilerplate/common';
 import {
   findAllUsers,
@@ -26,7 +26,7 @@ export const findUserHandler: Handler = async (
     let result;
 
     if (!email && !userId) {
-      throw new WrongParamsError('Invalid query params');
+      throw new AppError(CommomErrors.MAKE_USER_PARAMS, 'Invalid query params');
     }
 
     const isAdminOrUser =
@@ -39,7 +39,8 @@ export const findUserHandler: Handler = async (
     } else if (userId && isAdminOrUser) {
       result = await findUserByUserId(userId);
     } else {
-      throw new UnauthorizeError(
+      throw new AppError(
+        CommomErrors.USER_UNAUTHORIZED,
         `User ${user.userId} is trying to access information for user ${
           email || userId
         }`

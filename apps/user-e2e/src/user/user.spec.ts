@@ -9,7 +9,7 @@ describe('POST /user', () => {
       fname: 'Oscar',
       lname: 'Lopez',
       email: 'oscar@oscar.com',
-      password: 'Abc123',
+      password: 'AAbbc123@',
     };
 
     const response = await axios.post(`${BASE_URL}/user`, userData, {});
@@ -36,7 +36,7 @@ describe('POST /user', () => {
   it('should login a user', async () => {
     const userData = {
       email: 'oscar@oscar.com',
-      password: 'Abc123',
+      password: 'AAbbc123@',
     };
 
     const response = await axios.post(`${BASE_URL}/user/login`, userData);
@@ -69,6 +69,23 @@ describe('POST /user', () => {
     } catch (error) {
       expect(error.response.status).toBe(401);
       expect(error.response.data.message).toEqual('Not Authorized');
+    }
+  });
+
+  it('should fail if user tries add extra params to create route', async () => {
+    try {
+      const userData = {
+        fname: 'Oscar',
+        lname: 'Lopez',
+        email: 'oscar@oscar.com',
+        password: 'AAbbc123@',
+        extraField: 'should reject this',
+      };
+
+      await axios.post(`${BASE_URL}/user`, userData, {});
+    } catch (error) {
+      expect(error.response.status).toBe(400);
+      expect(error.response.data.message).toEqual('Wrong params, check logs');
     }
   });
 });
