@@ -16,11 +16,13 @@ export const userValidator = checkExact([
 ]);
 
 export const userLoginValidator = checkExact([
-  body('password')
-    .exists()
-    .isLength({ min: 4, max: 16 })
-    .matches(/^(?=.*?\d)(?=.*?[a-zA-Z])[a-zA-Z\d]+$/)
-    .withMessage('missing or not valid password'),
+  body('password').exists().isStrongPassword({
+    minLength: 6,
+    minLowercase: 2,
+    minUppercase: 2,
+    minNumbers: 1,
+    minSymbols: 1,
+  }),
   body('email')
     .exists()
     .matches(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/)

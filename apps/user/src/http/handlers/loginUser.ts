@@ -1,6 +1,6 @@
 import { Handler, Response } from 'express';
 import { LoginUserParams, loginUser } from '../../services';
-import { AppError, ErrorHandler, Severity } from '@boilerplate/common';
+import { ErrorHandler, Severity } from '@boilerplate/common';
 import { CustomRequest } from '../types';
 
 export const loginUserHandler: Handler = async (
