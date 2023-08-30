@@ -59,6 +59,14 @@ describe('POST /user', () => {
     expect(response.data.result.status).toEqual('active');
   });
 
+  it('should get the health endpoint', async () => {
+    const response = await axios.get(`${BASE_URL}/user/meta`, {});
+
+    expect(response.status).toBe(200);
+
+    expect(response.data.message).toEqual('I am alive');
+  });
+
   it('should fail if user tries to access admin route', async () => {
     try {
       await axios.get(`${BASE_URL}/user/all`, {
