@@ -9,6 +9,8 @@ import {
 import { validatorMiddleware } from '@boilerplate/middleware';
 import { loginUserHandler } from '../handlers/loginUser';
 import { authUserMiddleware, authAdminMiddleware } from '../middleware';
+import { meta } from '../handlers/meta';
+import { maintenance } from '../handlers/maintenace';
 
 const router = Router();
 
@@ -26,5 +28,7 @@ router.post(
   validatorMiddleware,
   asyncHandler(loginUserHandler)
 );
+router.get('/meta', asyncHandler(meta));
+router.get('/maintenace', authAdminMiddleware, asyncHandler(maintenance));
 
 export default router;

@@ -1,5 +1,5 @@
 import { User } from '../entities';
-import { DbMethodsType } from '../infra/repo/dbMethods';
+import { DbMethodsType, RepoNames } from '../infra/repo/dbMethods';
 
 import { FindUsers, RemovePassword } from './interfaces';
 
@@ -9,7 +9,7 @@ export const MakeFindUser = (
 ): FindUsers => {
   const findUserByEmail = async (email: string) => {
     const result = removePassword(
-      await repo('users').findOne<User>({ email })
+      await repo(RepoNames.USERREPO).findOne<User>({ email })
     ) as Partial<User>;
 
     return result;
@@ -17,7 +17,7 @@ export const MakeFindUser = (
 
   const findUserByUserId = async (userId: string) => {
     const result = removePassword(
-      await repo('users').findOne<User>({ userId })
+      await repo(RepoNames.USERREPO).findOne<User>({ userId })
     ) as Partial<User>;
 
     return result;
@@ -25,7 +25,7 @@ export const MakeFindUser = (
 
   const findAllUsers = async () => {
     const result = removePassword(
-      await repo('users').find<User>({})
+      await repo(RepoNames.USERREPO).find<User>({})
     ) as Partial<User>[];
 
     return result;
