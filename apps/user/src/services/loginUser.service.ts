@@ -1,4 +1,5 @@
 import { User } from '../entities';
+import { RepoNames } from '../infra/repo/dbMethods';
 import { LoginUser, LoginUserParams, MakeLoginUserParams } from './interfaces';
 import { AppError, CommomErrors } from '@boilerplate/common';
 
@@ -13,7 +14,7 @@ export const MakeLoginUser = ({
     userAgent,
     clientIp,
   }: LoginUserParams) => {
-    const user = await repo('users').findOne<User>({ email: email });
+    const user = await repo(RepoNames.USERREPO).findOne<User>({ email: email });
 
     if (!(Object.keys(user).length > 0)) {
       throw new AppError(
@@ -32,7 +33,7 @@ export const MakeLoginUser = ({
     const passwordMatch = await comparePassword(password, user.password);
 
     if (!passwordMatch) {
-      await repo('users').updateOne<User>(
+      await repo(RepoNames.USERREPO).updateOne<User>(
         { userId: user.userId },
         { failedAttempts: user.failedAttempts + 1 }
       );
@@ -40,7 +41,7 @@ export const MakeLoginUser = ({
     }
 
     if (user.failedAttempts !== 0) {
-      await repo('users').updateOne<User>(
+      await repo(RepoNames.USERREPO).updateOne<User>(
         { userId: user.userId },
         { failedAttempts: 0 }
       );

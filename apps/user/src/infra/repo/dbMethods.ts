@@ -6,6 +6,10 @@ import {
 } from 'mongodb';
 import { UserRepo, UserModel } from './mongo-models';
 
+export enum RepoNames {
+  USERREPO = 'users',
+}
+
 export interface InstanceModel {
   find: <T>(where: Partial<T>) => Promise<T[]>;
   findOne: <T>(where: Partial<T>) => Promise<T>;
@@ -21,7 +25,7 @@ export type DbMethodsType = (collection: string) => Readonly<InstanceModel>;
 export const LoadMethods = async (): Promise<void> => {
   if (Array.from(dbInstancesModels.keys()).length === 0) {
     dbInstancesModels.set(
-      'users',
+      RepoNames.USERREPO,
       loadModel<UserModel>(await UserRepo.userInstance())
     );
   }

@@ -1,5 +1,5 @@
 import { makeUser, StatusEnum, User } from '../entities';
-import { DbMethodsType } from '../infra/repo/dbMethods';
+import { DbMethodsType, RepoNames } from '../infra/repo/dbMethods';
 import { AddUser, MakePassword } from './interfaces';
 
 export const MakeAddUser = (
@@ -11,7 +11,7 @@ export const MakeAddUser = (
 
     const hashPassword = await makePassword(validUser.getPassword());
 
-    await repo('users').insert<User>({
+    await repo(RepoNames.USERREPO).insert<User>({
       fname: validUser.getFname(),
       lname: validUser.getLname(),
       password: hashPassword,
