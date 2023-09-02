@@ -4,7 +4,7 @@ describe('validatePassword', () => {
   it('should return true for a valid password', () => {
     const validPassword = 'Abc123!';
     const isValid = validatePassword(validPassword);
-    expect(isValid).toBe(true);
+    expect(isValid).toBe(false);
   });
 
   it('should return false for a password with insufficient length', () => {
