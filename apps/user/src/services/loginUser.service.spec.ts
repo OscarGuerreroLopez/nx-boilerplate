@@ -32,6 +32,14 @@ describe('Login user test', () => {
       email: 'oscar@oscar.com',
       password: 'AAbbc123@',
     });
+
+    await AddUser({
+      fname: 'Oscar',
+      lname: 'Lopez',
+      email: 'oscar2@oscar.com',
+      password: 'AAbbc123@',
+      failedAttempts: 4,
+    });
   }, 120000);
 
   afterAll(async () => {
@@ -80,6 +88,19 @@ describe('Login user test', () => {
       });
     } catch (error) {
       expect(error.message).toStrictEqual('password mismatch');
+    }
+  });
+
+  it('should throw user blocked error', async () => {
+    try {
+      await loginUser({
+        email: 'oscar2@oscar.com',
+        password: 'Abc123X',
+        clientIp: '0.0.0.1',
+        userAgent: 'fakeUserAgent',
+      });
+    } catch (error) {
+      expect(error.message).toStrictEqual('User 111 is blocked');
     }
   });
 });
