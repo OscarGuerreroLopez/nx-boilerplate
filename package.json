@@ -6,8 +6,8 @@
   },
   "license": "MIT",
   "scripts": {
-    "test": "nx reset && nx run-many --all --target=test",
-    "test:user": "nx test user",
+    "test": "nx reset && nx run-many --all --target=test --code-coverage --detectOpenHandles",
+    "test:user": "nx test user --code-coverage --detectOpenHandles",
     "test:common": "nx test common",
     "test:user:e2e": "nx e2e user-e2e",
     "lint:user": "nx run user:lint",

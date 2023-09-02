@@ -30,7 +30,9 @@
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
         "jestConfig": "libs/middleware/jest.config.ts",
-        "passWithNoTests": true
+        "passWithNoTests": true,
+        "verbose": true,
+        "coverageReporters": ["text"]
       },
       "configurations": {
         "ci": {
