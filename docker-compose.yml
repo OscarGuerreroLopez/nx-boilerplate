@@ -1,0 +1,28 @@
+version: '3.8'
+services:
+  user:
+    image: user
+    ports:
+      - '3001:3001'
+    env_file:
+      - .docker.env
+    networks:
+      - node-network
+    restart: always
+    
+
+  mongodb:
+    image: mongo:latest
+    ports:
+      - '27017:27017'
+    volumes:
+      - ~/apps/mongo:/data/boilerplate
+    env_file:
+      - .docker.env
+    networks:
+      - node-network
+networks:
+  node-network:
+    driver: bridge
+
+
