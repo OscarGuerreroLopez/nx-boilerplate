@@ -27,7 +27,8 @@ export const AddAdminUser = async (): Promise<void> => {
       code: '',
     });
   } catch (error) {
-    throw new Error('Not able to add admin user');
+    // if they are already added don't do anything
+    console.error('Not able to add admin user');
   }
 };
 
@@ -74,6 +75,7 @@ export const AddUsers = async (): Promise<void> => {
       code: '',
     });
   } catch (error) {
-    throw new Error('Not able to add admin user');
+    // if they are already added don't do anything
+    console.error('Not able to add admin user');
   }
 };
