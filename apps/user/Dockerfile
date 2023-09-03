@@ -4,10 +4,14 @@
 # Tip: Modify "docker-build" options in project.json to change docker build args.
 #
 # Run the container with `docker run -p 3000:3000 -t user`.
-FROM docker.io/node:lts-alpine
+FROM node:lts-alpine
 
-ENV HOST=0.0.0.0
-ENV PORT=3000
+
+
+# Install Python, make, and g++
+RUN apk add --no-cache python3 make g++
+ENV PYTHON=/usr/bin/python3
+
 
 WORKDIR /app
 
@@ -20,5 +24,7 @@ RUN chown -R user:user .
 # You can remove this install step if you build with `--bundle` option.
 # The bundled output will include external dependencies.
 RUN npm --prefix user --omit=dev -f install
+
+EXPOSE 3001
 
 CMD [ "node", "user" ]

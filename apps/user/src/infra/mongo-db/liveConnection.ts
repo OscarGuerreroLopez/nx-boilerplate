@@ -16,8 +16,9 @@ export const LiveConnection = (() => {
 
       mongoClient = new MongoClient(uri, options);
       await mongoClient.connect();
-      db = mongoClient.db('accounts');
-      logger.info('accounts Live DB activated', {
+      db = mongoClient.db('test');
+
+      logger.info('test Live DB activated', {
         service: 'boilerplate',
         file: 'liveConnection.ts',
         function: 'createConnection',

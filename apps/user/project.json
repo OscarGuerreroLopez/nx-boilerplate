@@ -75,6 +75,17 @@
         }
       }
     },
+    "deploy": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "commands": [
+          "nx lint user",
+          "nx build user",
+          "docker build -f ./apps/user/Dockerfile . -t user"
+        ],
+        "parallel": false
+      }
+    },
     "docker-build": {
       "dependsOn": ["build"],
       "command": "docker build -f apps/user/Dockerfile . -t user"

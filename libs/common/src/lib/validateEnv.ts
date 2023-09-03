@@ -3,6 +3,7 @@ import { cleanEnv, str, num } from 'envalid';
 export enum NodeEnvEnum {
   DEVELOPMENT = 'development',
   TEST = 'test',
+  STAGE = 'stage',
   PROD = 'prod',
 }
 

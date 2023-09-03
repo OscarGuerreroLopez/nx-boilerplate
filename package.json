@@ -15,10 +15,13 @@
     "serve:all": "rm -rf logs && npm run build:all && nx run-many --target=serve --projects=user --parallel",
     "build:all": "npm run lint && nx run-many --target=build --projects=user --parallel",
     "serve:user": "npm run build:all && nx serve user",
-    "graph": "nx graph"
+    "graph": "nx graph",
+    "deploy": "nx affected --target=docker-build"
   },
   "private": true,
   "dependencies": {
+    "@nrwl/node": "^16.7.4",
+    "@nrwl/workspace": "^16.7.4",
     "axios": "^1.0.0",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",

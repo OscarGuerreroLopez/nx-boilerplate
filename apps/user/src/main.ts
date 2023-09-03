@@ -1,5 +1,5 @@
 import express from 'express';
-import { EnvVars, logger } from '@boilerplate/common';
+import { EnvVars, logger, NodeEnvEnum } from '@boilerplate/common';
 import {
   expressSecureHeaders,
   expressRateLimiter,
@@ -45,7 +45,13 @@ process.on('unhandledRejection', (e: any) => {
 
 app.listen(port, host, async () => {
   await LoadMethods();
-  await AddAdminUser();
-  await AddUsers();
+  if (
+    EnvVars.NODE_ENV === NodeEnvEnum.TEST ||
+    EnvVars.NODE_ENV === NodeEnvEnum.DEVELOPMENT
+  ) {
+    await AddAdminUser();
+    await AddUsers();
+  }
+
   console.log(`[ ready ] http://${host}:${port}`);
 });
