@@ -9,6 +9,16 @@ services:
     networks:
       - node-network
     restart: always
+  
+  account:
+    image: account
+    ports:
+      - '3002:3002'
+    env_file:
+      - .docker.env
+    networks:
+      - node-network
+    restart: always
     
 
   mongodb:
