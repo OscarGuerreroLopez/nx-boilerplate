@@ -1,11 +1,8 @@
 import express from 'express';
 import { EnvVars, logger, NodeEnvEnum } from '@boilerplate/common';
 import {
-  expressSecureHeaders,
-  expressRateLimiter,
-  expressEssentials,
   LoggerMiddleware,
-  expressRequestIp,
+  commonExpressMiddleware,
 } from '@boilerplate/middleware';
 import Router from './http/router';
 import { LoadMethods } from './infra/repo/dbMethods';
@@ -16,10 +13,7 @@ const host = EnvVars.HOST ?? 'localhost';
 const port = EnvVars.PORT ? Number(process.env.PORT) : 3001;
 
 const app = express();
-expressSecureHeaders(app);
-expressRateLimiter(app);
-expressEssentials(app);
-expressRequestIp(app);
+commonExpressMiddleware(app);
 app.use(LoggerMiddleware);
 app.use(Router);
 
@@ -53,5 +47,9 @@ app.listen(port, host, async () => {
     await AddUsers();
   }
 
-  console.log(`[ ready ] http://${host}:${port}`);
+  logger.info(`[ ready ] http://${host}:${port}`, {
+    service: 'user',
+    file: 'main.ts',
+    code: '',
+  });
 });
