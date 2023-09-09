@@ -10,4 +10,9 @@ export class AppController {
   getData() {
     return this.appService.getData();
   }
+
+  @Get('/meta')
+  getMeta() {
+    return { message: 'I am alive' };
+  }
 }
