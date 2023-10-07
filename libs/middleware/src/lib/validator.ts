@@ -14,8 +14,8 @@ export const validatorMiddleware = (
   if (!errors.isEmpty()) {
     let message = '';
 
-    errors.array().forEach((err) => {
-      message += `${err.msg || ''} ,`;
+    errors.array().forEach((err: any) => {
+      message += `Validation error in ${err.location}. Type: ${err.type}: ${err.path}. ${err.msg} ,  `;
     });
 
     ErrorHandler({

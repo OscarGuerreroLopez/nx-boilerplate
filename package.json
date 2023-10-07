@@ -15,6 +15,7 @@
     "serve:all": "rm -rf logs && npm run build:all && nx run-many --target=serve --projects=user,account --parallel",
     "build:all": "npm run lint && nx run-many --target=build --projects=user,account --parallel",
     "serve:user": "npm run build:all && nx serve user",
+    "serve:account": "npm run build:all && nx serve account",
     "graph": "nx graph",
     "deploy": "nx affected --target=docker-build"
   },

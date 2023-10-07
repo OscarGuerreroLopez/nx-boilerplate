@@ -4,7 +4,16 @@ export const SanitiseBody = (
   unsanitisedBody: IObjectLiteral
 ): IObjectLiteral => {
   const maskEmail = (email: string): string => {
-    const [username, domain] = email.split('@');
+    let username;
+    let domain;
+
+    if (email.includes('@')) {
+      [username, domain] = email.split('@');
+    } else {
+      username = email;
+      domain = '';
+    }
+
     const maskedUsername =
       username.slice(0, 2) + '*'.repeat(username.length - 2);
     const domainParts = domain.split('.');
