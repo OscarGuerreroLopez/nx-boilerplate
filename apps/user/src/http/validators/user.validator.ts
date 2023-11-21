@@ -9,10 +9,7 @@ export const userValidator = checkExact([
     minNumbers: 1,
     minSymbols: 1,
   }),
-  body('email')
-    .exists()
-    .matches(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/)
-    .withMessage('missing or invalid email'),
+  body('email').exists().isEmail().withMessage('missing or invalid email'),
 ]);
 
 export const userLoginValidator = checkExact([
@@ -23,8 +20,5 @@ export const userLoginValidator = checkExact([
     minNumbers: 1,
     minSymbols: 1,
   }),
-  body('email')
-    .exists()
-    .matches(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/)
-    .withMessage('missing or invalid email'),
+  body('email').exists().isEmail().withMessage('missing or invalid email'),
 ]);
